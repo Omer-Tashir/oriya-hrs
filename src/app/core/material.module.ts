@@ -107,6 +107,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-  ],
+  ]
 })
 export class CustomMaterialModule {}

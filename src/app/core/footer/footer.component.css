@@ -1,0 +1,35 @@
+footer {
+    background: #272727;
+}
+
+footer * {
+    color: white;
+}
+
+.contact-us-title {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 30px 5vw 0;
+}
+
+.contact-details-container {
+    padding: 30px 5vw 0;
+    display: grid;
+    grid-template-columns: max-content auto max-content auto;
+    gap: 30px;
+}
+
+.bold {
+    justify-self: flex-end;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.copyrights {
+    background: black;
+    padding: 12px;
+    margin: 50px auto 0;
+    display: block;
+    text-align: center;
+    font-size: 13px;
+}

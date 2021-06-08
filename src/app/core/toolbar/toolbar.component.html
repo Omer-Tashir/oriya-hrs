@@ -29,20 +29,14 @@
           <li *ngIf="isAdmin">
             <a [routerLink]="'/admin'">מסך ניהול</a>
           </li>
-          <li *ngIf="!isAdmin && isVolunteer">
-            <a [routerLink]="'/volunteer-admin-panel'">מסך ניהול</a>
+          <li>
+            <a [routerLink]="'/companies'">חברות</a>
           </li>
           <li>
-            <a [routerLink]="'/gallery'">גלריית תמונות</a>
+            <a [routerLink]="'/candidates'">מועמדים</a>
           </li>
           <li>
-            <a [routerLink]="'/about'">אודות</a>
-          </li>
-          <li>
-            <a [routerLink]="'/contact-us'">צור קשר</a>
-          </li>
-          <li>
-            <a [routerLink]="'/faq'">שאלות ותשובות</a>
+            <a [routerLink]="'/articles'">מאמרים</a>
           </li>
         </ul>
       </div>

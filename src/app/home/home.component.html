@@ -6,7 +6,7 @@
       <img src="assets/logo.png" [@fadeInRightOnEnter] />
       <p [@fadeInRightOnEnter]>
         אוריה השמה וגיוס עובדים
-        <span>הדרך שלך למציאת עבודה חדשה מתחילה כאן!</span>
+        <span>שותפים להצלחה שלך!</span>
       </p>
     </div>
 
@@ -26,15 +26,19 @@
   </section>
   
   <section class="categories-section" [@fadeInOnEnter] [@fadeOutOnLeave]>
-    <p class="categories-title">התחומים אליהם אנחנו מגייסים:</p>
-    <div class="categories">
-      <div class="category" *ngFor="let category of categories$ | async">
-        <div class="category-item">
-          <img [ngClass]="{'hidden': !category.photoLoaded}" [attr.src]="category.image" width="200" height="200"
-            (load)="category.photoLoaded = true">
-          <div>{{category.name}}</div>
+    <ng-container *ngIf="(categories$ | async) as categories">
+      <p class="categories-title">התחומים אליהם אנחנו מגייסים:</p>
+      <div class="categories" @listAnimation>
+        <div class="category" *ngFor="let category of categories" @item>
+          <div class="category-item">
+            <img [ngClass]="{'hidden': !category.photoLoaded}" [attr.src]="category.image" width="300" height="200"
+              (load)="category.photoLoaded = true">
+            <div>{{category.name}}</div>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </section>
 </div>
+
+<app-footer></app-footer>

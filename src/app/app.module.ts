@@ -48,25 +48,16 @@ import { InvalidRequestSnackComponent } from './core/alerts/invalid-request-snac
 import { ConflictSnackComponent } from './core/alerts/conflict-snack.component';
 import { NotFoundSnackComponent } from './core/alerts/not-found-snack.component';
 import { WarningDialogComponent } from './core/warning-dialog/warning-dialog.component';
-import { InlayDialogComponent } from './core/inlay-dialog/inlay-dialog.component';
-import { ShowUserDialogComponent } from './core/show-user-dialog/show-user-dialog.component';
 
 // Shared presentation components and supporting services
+import { FooterComponent } from './core/footer/footer.component';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
-import { GalleryComponent } from './gallery/gallery.component';
-import { AboutComponent } from './about/about.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { FaqComponent } from './faq/faq.component';
-import { VolunteerComponent } from './volunteer/volunteer.component';
-import { JoinUsComponent } from './join-us/join-us.component';
-import { ReferANeedyComponent } from './refer-a-needy/refer-a-needy.component';
 import { AdminComponent } from './admin/admin.component';
-import { ViewUpdateVolunteersComponent } from './view-update-volunteers/view-update-volunteers.component';
-import { VolunteerAdminPanelComponent } from './volunteer-admin-panel/volunteer-admin-panel.component';
-import { VolunteerAddShiftsComponent } from './volunteer-add-shifts/volunteer-add-shifts.component';
-import { VolunteerEditShiftsComponent } from './volunteer-edit-shifts/volunteer-edit-shifts.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { CandidatesComponent } from './candidates/candidates.component';
+import { ArticlesComponent } from './articles/articles.component';
 
 export const CUSTOM_DATE_FORMAT = {
   parse: {
@@ -86,9 +77,8 @@ export const CUSTOM_DATE_FORMAT = {
     HomeComponent,
     LoginComponent,
     ToolbarComponent,
+    FooterComponent,
     WarningDialogComponent,
-    InlayDialogComponent,
-    ShowUserDialogComponent,
     InvalidRequestSnackComponent,
     ConflictSnackComponent,
     NotFoundSnackComponent,
@@ -100,18 +90,10 @@ export const CUSTOM_DATE_FORMAT = {
     YearDateFormatPipe,
     DateTimeFormatPipe,
     TimeFormatPipe,
-    GalleryComponent,
-    AboutComponent,
-    ContactUsComponent,
-    FaqComponent,
-    VolunteerComponent,
-    JoinUsComponent,
-    ReferANeedyComponent,
     AdminComponent,
-    ViewUpdateVolunteersComponent,
-    VolunteerAdminPanelComponent,
-    VolunteerAddShiftsComponent,
-    VolunteerEditShiftsComponent,
+    CompaniesComponent,
+    CandidatesComponent,
+    ArticlesComponent,
   ],
   imports: [
     CommonModule,
@@ -139,8 +121,6 @@ export const CUSTOM_DATE_FORMAT = {
     ConflictSnackComponent,
     NotFoundSnackComponent,
     WarningDialogComponent,
-    InlayDialogComponent,
-    ShowUserDialogComponent,
   ],
   providers: [
     DateFormatPipe,

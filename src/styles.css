@@ -48,6 +48,10 @@ table {
   letter-spacing: 1px !important;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 .mat-toolbar-row,
 .mat-toolbar-single-row {
   background: black;
