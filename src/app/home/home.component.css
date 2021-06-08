@@ -1,6 +1,7 @@
 .background-container {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .background-container,
@@ -65,6 +66,10 @@
 .categories .category .category-item img {
   object-fit: cover;
   object-position: center;
+}
+
+.description-block {
+  position: relative;
 }
 
 .description {
