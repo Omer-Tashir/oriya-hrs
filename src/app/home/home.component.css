@@ -6,19 +6,9 @@
 .background-container,
 .background-container:before {
   width: 100%;
-  height: 30vh;
-  min-height: 300px;
-}
-
-.background-container:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  background-repeat: no-repeat;
-  background-position: 0 50%;
-  background-size: cover;
-  z-index: 1;
-  opacity: 0.4;
+  height: 10vh;
+  min-height: 150px;
+  background: #3f3f3f;
 }
 
 .background-container img,
@@ -29,61 +19,72 @@
 
 .background-container img {
   padding-right: 75px;
-  height: 150px;
+  height: 100px;
 }
 
 .background-container p {
   padding-right: 30px;
-  font-size: 38px;
-  line-height: 50px;
-  color: #be3a2d;
-  text-shadow: 2px 1px 1px gainsboro;
+  font-size: 30px;
+  line-height: 35px;
+  color: #dbdbdb;
   font-weight: bold;
 }
 
 .background-container p span {
   display: block;
-  font-size: 20px;
+  font-size: 18px;
+  padding-right: 30px;
+  font-style: italic;
+  color: whitesmoke;
 }
 
-.actions .actions-container {
-  margin: 50px;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  text-align: center;
+.categories-title {
+  font-size: 22px;
+  margin: 30px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 45px;
+  padding: 25px;
 }
 
-.actions .actions-container .action {
-  height: 175px;
-  display: grid;
-  grid-template-rows: 75px auto 25px;
+.categories .category {
+  margin: 15px;
+}
+
+.categories .category .category-item {
   text-align: center;
-  align-items: center;
-  justify-content: center;
-  max-width: 350px;
-  margin-bottom: 50px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.actions .actions-container .action .top-btn {
-  font-size: 16px;
-}
-
-.actions .actions-container .action .bottom-btn {
-  margin: auto;
-}
-
-.actions .actions-container .action .action-text {
-  font-size: 14px;
+.categories .category .category-item img {
+  object-fit: cover;
+  object-position: center;
 }
 
 .description {
-  background: black;
-  font-size: 18px;
+  background: #3f3f3f;
+  font-size: 19px;
   line-height: 1.5;
   font-weight: bold;
   color: white;
-  padding: 30px;
+  padding: 45px 30px;
+}
+
+.video {
+  height: 30vh;
+  padding: 5vh;
+  background: black;
+}
+
+.video video {
+  height: 100%;
+  display: block;
+  margin: auto;
 }

@@ -1,20 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { catchError, map, shareReplay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+
+import { Globals } from '../app.globals';
 
 import { Needy } from '../model/needy';
 import { Inlay } from '../model/inlay';
 import { Volunteer } from '../model/volunteer';
 import { TeamMember } from '../model/team-member';
 import { Shift } from '../model/shift';
-import { Globals } from '../app.globals';
+
+import { Category } from '../model/category.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
   constructor(private db: AngularFirestore, private http: HttpClient, public globals: Globals) {}
+
+  getCategories(): Observable<Category[]> {
+    return this.db.collection(`categories`).get().pipe(
+      map(categories => categories.docs.map(doc => {
+        return <Category>doc.data();
+      })),
+      catchError(err => of([])),
+      shareReplay()
+    );
+  }
 
   getLookupData(): Observable<any> {
     return this.db.collection(`lookup_data`).get();
