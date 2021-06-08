@@ -1,0 +1,90 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+
+<mat-dialog-content>
+  <form [formGroup]="form" autocomplete="off" novalidate fxLayout="column wrap"
+    fxLayoutAlign="center center" fxLayoutGap="10px">
+    <mat-card-content>
+      <mat-form-field *ngIf="data?.user?.rname">
+        <input matInput type="text" placeholder="שם הממליץ" formControlName="rname" id="rname">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data?.user?.rphone">
+        <input matInput type="tel" placeholder="מספר טלפון של הממליץ" formControlName="rphone" id="rphone">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data?.user?.fname">
+        <input matInput type="text" placeholder="שם פרטי" formControlName="fname" id="fname" >
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data?.user?.lname">
+        <input matInput type="text" placeholder="שם משפחה" formControlName="lname" id="lname" >
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data?.user?.personal_id">
+        <input matInput type="number" placeholder="תעודת זהות" formControlName="personal_id" id="personal_id" >
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data?.user?.email">
+        <input matInput type="email" placeholder="אימייל" formControlName="email" id="email">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data?.user?.phone">
+        <input matInput type="tel" placeholder="מספר טלפון" formControlName="phone" id="phone" >
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data?.user?.date_of_birth">
+        <input matInput type="date" placeholder="תאריך לידה" formControlName="date_of_birth" id="date_of_birth">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data?.user?.city">
+        <input matInput type="text" placeholder="עיר" formControlName="city" id="city" >
+      </mat-form-field>
+
+      <div class="inner-grid">
+        <mat-form-field *ngIf="data?.user?.address">
+          <input matInput type="text" placeholder="רחוב" formControlName="address" id="address" >
+        </mat-form-field>
+
+        <mat-form-field *ngIf="data?.user?.address_number">
+          <input matInput type="number" placeholder="מס' בית" formControlName="address_number" id="address_number" >
+        </mat-form-field>
+      </div>
+
+      <div class="margin-top" *ngIf="data?.user?.interests">
+        <label>תחומי עניין</label>
+          <ul>
+            <li *ngFor="let interest of form.controls['interests'].value">{{interest}}</li>
+          </ul>
+      </div>
+
+      <div class="margin-top" *ngIf="data?.user?.preferences">
+        <label>מעדיף לבקר</label>
+          <ul>
+            <li *ngFor="let preference of form.controls['preferences'].value">{{preference}}</li>
+          </ul>
+      </div>
+
+      <div class="margin-top" *ngIf="data?.user?.groups">
+        <label>קבוצות שייכות</label>
+          <ul>
+            <li *ngFor="let group of form.controls['groups'].value">{{group}}</li>
+          </ul>
+      </div>
+    </mat-card-content>
+
+    <div class="checkbox-group">
+      <mat-checkbox *ngIf="data?.user?.is_one_time_volunteering!=undefined" formControlName="is_one_time_volunteering" id="is_one_time_volunteering">התנדבות חד פעמית</mat-checkbox>
+      <mat-checkbox *ngIf="data?.user?.is_mobility!=undefined" formControlName="is_mobility" id="is_mobility">נייד\ת עם רכב</mat-checkbox>
+      <mat-checkbox *ngIf="data?.user?.is_kosher!=undefined" formControlName="is_kosher" id="is_kosher">מטבח שומר כשרות</mat-checkbox>
+      <mat-checkbox *ngIf="data?.user?.is_parve!=undefined" formControlName="is_parve" id="is_parve">פרווה</mat-checkbox>
+      <mat-checkbox *ngIf="data?.user?.is_vegan!=undefined" formControlName="is_vegan" id="is_vegan">טבעוני</mat-checkbox>
+      <mat-checkbox *ngIf="data?.user?.is_gluten_free!=undefined" formControlName="is_gluten_free" id="is_gluten_free">ללא גלוטן</mat-checkbox>
+    </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">
+    <ng-container>סגור</ng-container>
+  </button>
+</mat-dialog-actions>

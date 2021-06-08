@@ -1,0 +1,113 @@
+<app-toolbar [title]="'ספרו לנו למי אנחנו יכולים לעזור'"></app-toolbar>
+
+<section class="background" [@fadeInOnEnter] [@fadeOutOnLeave]>
+  <div class="background-container pie-{{random}}"></div>
+</section>
+
+<section class="form" [@fadeInOnEnter] [@fadeOutOnLeave]>
+  <form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="submit(form?.value)" fxLayout="column wrap"
+    fxLayoutAlign="center center" fxLayoutGap="10px">
+
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput type="text" placeholder="שם הממליץ" formControlName="rname" id="rname" required>
+        <mat-error *ngIf="hasError('rname', 'required')">חובה להזין שם</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="tel" placeholder="מספר טלפון של הממליץ" formControlName="rphone" id="rphone" required>
+        <mat-error *ngIf="hasError('rphone', 'required')">חובה להזין מספר טלפון</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <h1 class="title">פרטי האדם שאליו תרצו שנגיע</h1>
+
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput type="text" placeholder="שם פרטי" formControlName="fname" id="fname" required>
+        <mat-error *ngIf="hasError('fname', 'required')">חובה להזין שם פרטי</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="שם משפחה" formControlName="lname" id="lname" required>
+        <mat-error *ngIf="hasError('lname', 'required')">חובה להזין שם משפחה</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="תעודת זהות" formControlName="personal_id" id="personal_id" required>
+        <mat-hint>כולל ספרת ביקורת</mat-hint>
+        <mat-error *ngIf="hasError('personal_id', 'required')">חובה להזין תעודת זהות</mat-error>
+        <mat-error *ngIf="hasError('personal_id', 'minlength')">חובה להזין מספר תעודת זהות תקין, כולל ספרת ביקורת</mat-error>
+        <mat-error *ngIf="hasError('personal_id', 'maxlength')">חובה להזין מספר תעודת זהות תקין, כולל ספרת ביקורת</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="email" placeholder="אימייל" formControlName="email" id="email">
+        <mat-error *ngIf="hasError('email', 'email')">כתובת לא תקינה</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="tel" placeholder="מספר טלפון" formControlName="phone" id="phone" required>
+        <mat-error *ngIf="hasError('phone', 'required')">חובה להזין מספר טלפון</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="date" placeholder="תאריך לידה" formControlName="date_of_birth" id="date_of_birth">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="עיר" formControlName="city" id="city" required [matAutocomplete]="autoCities"
+        (blur)="checkCity()" autocomplete="off">
+        <mat-autocomplete autoActiveFirstOption #autoCities="matAutocomplete" (optionSelected)="cityClick($event)">
+          <mat-option *ngFor="let city of filteredCities | async" [value]="city.name">
+            {{ city.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="hasError('city', 'required')">חובה להזין עיר</mat-error>
+      </mat-form-field>
+  
+      <div class="inner-grid">
+        <mat-form-field>
+          <input matInput type="text" placeholder="רחוב" formControlName="address" id="address" required [matAutocomplete]="autoAddresses" (blur)="checkStreet()" autocomplete="off">
+          <mat-autocomplete autoActiveFirstOption #autoAddresses="matAutocomplete"
+            (optionSelected)="streetClick($event)">
+            <mat-option *ngFor="let street of filteredStreets | async" [value]="street['שם_רחוב']">
+              {{ street['שם_רחוב'] }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="hasError('address', 'required')">חובה להזין רחוב</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="number" placeholder="מס' בית" formControlName="address_number" id="address_number"
+            required>
+          <mat-error *ngIf="hasError('address_number', 'required')">חובה להזין מס' בית</mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <mat-select placeholder="תחומי עניין" formControlName="interests" id="interests" multiple>
+          <mat-option *ngFor="let interest of interests" [value]="interest">{{interest}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="לאיזה קבוצות משתייך?" formControlName="groups" id="groups" multiple required>
+          <mat-option *ngFor="let group of groups" [value]="group">{{group}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('groups', 'required')">חובה לבחור לפחות קבוצה אחת</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <div class="checkbox-group">
+      <mat-checkbox formControlName="is_kosher" id="is_kosher">חשיבות לכשרות</mat-checkbox>
+      <mat-checkbox formControlName="is_parve" id="is_parve">עדיפות לפרווה</mat-checkbox>
+      <mat-checkbox formControlName="is_vegan" id="is_vegan">טבעונות</mat-checkbox>
+      <mat-checkbox formControlName="is_gluten_free" id="is_gluten_free">רגישות לגלוטן</mat-checkbox>
+    </div>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="!form?.valid || isLoading==true">שמור ושלח</button>
+    </mat-card-actions>
+  </form>
+</section>

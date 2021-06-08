@@ -1,0 +1,57 @@
+.background-container,
+.background-container:before {
+  width: 100%;
+  height: 30vh;
+  min-height: 300px;
+}
+
+.background-container:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  background-size: cover;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+mat-card-content {
+  max-width: 700px;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 50px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card-actions button {
+  margin-bottom: 50px;
+}
+
+.inner-grid {
+  display: grid;
+  grid-template-columns: 200px 100px;
+  gap: 25px;
+}
+
+.checkbox-group {
+  max-width: 600px;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-evenly;
+  gap: 25px;
+}
+
+.title {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  font-weight: bold;
+  color: #6e6e6e;
+}

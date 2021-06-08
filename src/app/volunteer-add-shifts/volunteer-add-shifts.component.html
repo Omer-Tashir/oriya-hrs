@@ -1,0 +1,41 @@
+<app-toolbar [title]="'מתי תרצה להתנדב?'"></app-toolbar>
+
+<section class="background" [@fadeInOnEnter] [@fadeOutOnLeave]>
+  <div class="background-container pie-{{random}}"></div>
+</section>
+
+<section class="datepicker-section">
+  <p class="title">הנך מוזמן לבחור את התאריכים בהם תהיה מעונין להתנדב במהלך החודשיים הקרובים</p>
+  <p class="hint">* ניתן להשתבץ ל-8 התנדבויות במקביל לכל היותר</p>
+
+  <mat-card-content>
+    <div class="datepicker">
+      <mat-form-field>
+        <mat-label>בחר תאריך</mat-label>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" (dateChange)="valueChanged($event.target.value)" >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <p class="dates-picked">התאריכים שנבחרו:</p>
+      <ul class="dates-picked-list">
+        <li *ngFor="let date of sortData">
+          {{date | dateFormat}}
+          <mat-icon (click)="deleteDate(date)">delete</mat-icon>
+        </li>
+      </ul>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <div>
+      <p>אני מאשר שהתאריכים אותם בחרתי אינם מעידים על שיבוץ סופי, פרטים נוספים יתקבלו בהודעת SMS</p>
+      <mat-checkbox [formControl]="agreeToTerms"></mat-checkbox>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="pickedArr?.length==0 || isLoading || agreeToTerms.value==false" (click)="submit()">שבצו אותי</button>
+  </mat-card-actions>
+</section>
+
+<mat-card *ngIf="isLoading" class="mat-progress-spinner">
+  <mat-progress-spinner color="primary" mode="indeterminate" diameter="70"></mat-progress-spinner>
+</mat-card>

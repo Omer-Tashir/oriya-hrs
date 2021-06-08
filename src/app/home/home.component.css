@@ -1,0 +1,89 @@
+.background-container {
+  display: flex;
+  align-items: center;
+}
+
+.background-container,
+.background-container:before {
+  width: 100%;
+  height: 30vh;
+  min-height: 300px;
+}
+
+.background-container:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  background-size: cover;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+.background-container img,
+.background-container p {
+  position: relative;
+  z-index: 2;
+}
+
+.background-container img {
+  padding-right: 75px;
+  height: 150px;
+}
+
+.background-container p {
+  padding-right: 30px;
+  font-size: 38px;
+  line-height: 50px;
+  color: #be3a2d;
+  text-shadow: 2px 1px 1px gainsboro;
+  font-weight: bold;
+}
+
+.background-container p span {
+  display: block;
+  font-size: 20px;
+}
+
+.actions .actions-container {
+  margin: 50px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+}
+
+.actions .actions-container .action {
+  height: 175px;
+  display: grid;
+  grid-template-rows: 75px auto 25px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  max-width: 350px;
+  margin-bottom: 50px;
+}
+
+.actions .actions-container .action .top-btn {
+  font-size: 16px;
+}
+
+.actions .actions-container .action .bottom-btn {
+  margin: auto;
+}
+
+.actions .actions-container .action .action-text {
+  font-size: 14px;
+}
+
+.description {
+  background: black;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: bold;
+  color: white;
+  padding: 30px;
+}

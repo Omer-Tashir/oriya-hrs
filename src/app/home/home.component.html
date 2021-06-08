@@ -1,0 +1,59 @@
+<app-toolbar [auth]="auth"></app-toolbar>
+
+<section class="background" [@fadeInOnEnter] [@fadeOutOnLeave]>
+  <div class="background-container pie-1">
+    <img src="assets/logo.png" [@fadeInRightOnEnter] />
+    <p [@fadeInRightOnEnter]>
+      אוריה השמה וגיוס עובדים
+      <span>הדרך שלך למציאת עבודה חדשה מתחילה כאן!</span>
+    </p>
+  </div>
+
+  <p class="description">
+    חברת אוריה השמה היא חברת בוטיק איכותית ומשפחתית המורכבת מעובדים בעלי ידע וניסיון רב בתחום משאבי האנוש. החברה מלווה ומתאימה בהצלחה תהליכי גיוס והשמה שונים בחברות ישראליות ובחברות בינלאומיות תוך הקמת צוות גיוס מיוחד עבור תחומים שונים במשק: הייטק, ביוטק, קלינטק, תפקידי מטה, מגזר ציבורי ובכירים, ביטוח ופיננסים, בנקים ושוק ההון, קמעונאות, שילוח והפצה, בינוי ותשתיות, מלונאות, מפעלים, עובדים כללים ועוד.
+החברה מתאימה את הגיוס לפי צרכי הלקוחות ונתוני המשרה ע"י פתרונות גיוס מגוונים: מבחני מועמד, ראיונות, בדיקות דידקטיות שונות ועוד. במשך שנים החברה חרטה על דגלה להעניק ללקוחותיה ולמועמדים את השירות הטוב והיעיל ביותר כדי שיוכלו לצמוח עם האנשים הטובים ביותר.
+כי אנחנו באוריה השמה מאמינים שהאנשים הטובים ביותר הם העובדים הטובים ביותר.
+אוריה השמה - שותפים להצלחה שלך.
+  </p>
+</section>
+
+<section class="actions" [@fadeInOnEnter] [@fadeOutOnLeave]>
+  <div class="actions-container">
+    <div class="action" [@jackInTheBoxOnEnter]>
+      <button class="top-btn" [routerLink]="'/volunteer'" mat-button>
+        אני רוצה לאפות
+      </button>
+      <p class="action-text">
+        אנו מזמינים אתכם לנצל את יכולות האפיה שלכם ולהנעים את זמנם של אנשים
+        שישמחו לפגוש אתכם
+      </p>
+      <button class="bottom-btn" mat-icon-button color="warn">
+        <mat-icon color="warn">favorite</mat-icon>
+      </button>
+    </div>
+
+    <div class="action" [@jackInTheBoxOnEnter]>
+      <button class="top-btn" [routerLink]="'/refer-a-needy'" mat-button>
+        אני רוצה להוסיף אדם למאגר
+      </button>
+      <p class="action-text">
+        מכירים מישהו שזקוק לשיחה טובה עם עוגה טעימה בצד? השאירו את פרטיו פה
+      </p>
+      <button class="bottom-btn" mat-icon-button color="warn">
+        <mat-icon color="warn">favorite</mat-icon>
+      </button>
+    </div>
+
+    <div class="action" [@jackInTheBoxOnEnter]>
+      <button class="top-btn" mat-button [routerLink]="'/join-us'">
+        אני רוצה להיות חלק מצוות ההנהלה
+      </button>
+      <p class="action-text">
+        אנו תמיד זקוקים לידיים נוספות שיעזרו לנו לקדם את פעילות העמותה
+      </p>
+      <button class="bottom-btn" mat-icon-button color="warn">
+        <mat-icon color="warn">favorite</mat-icon>
+      </button>
+    </div>
+  </div>
+</section>

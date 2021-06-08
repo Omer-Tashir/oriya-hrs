@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" autocomplete="off" novalidate fxLayout="column wrap"
+    fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-form-field>
+        <input matInput type="date" placeholder="תאריך" formControlName="date" id="date">
+         <mat-error *ngIf="hasError('date', 'required')">חובה לבחור תאריך</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="מתנדב" formControlName="volunteer" id="volunteer" required>
+          <mat-option *ngFor="let volunteer of data.volunteers" [value]="volunteer.id">{{volunteer?.fname + ' ' + volunteer?.lname}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('volunteer', 'required')">חובה לבחור מתנדב</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="נמען" formControlName="needy" id="needy" required>
+          <mat-option *ngFor="let needy of data.needys" [value]="needy.id">{{needy?.fname + ' ' + needy?.lname}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('needy', 'required')">חובה לבחור נמען</mat-error>
+      </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">
+    <ng-container>בטל</ng-container>
+  </button>
+  <button mat-button [matDialogClose]="form.value" [disabled]="!form.valid" color="primary">
+    <ng-container>סיים ושמור</ng-container>
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,56 @@
+<mat-toolbar>
+  <ng-container *ngIf="!isLoading">
+    <div *ngIf="title && title!='load'" class="title-bar" [@fadeInOnEnter] [@fadeOutOnLeave]>
+      <div class="title">
+        <h1>{{ title }}</h1>
+      </div>
+
+      <div class="home" [routerLink]="'/home'">
+        <img src="assets/logo.png" alt="Home" height="32" />
+      </div>
+    </div>
+
+    <div *ngIf="!title" class="navbar" [@fadeInOnEnter] [@fadeOutOnLeave]>
+      <div class="login">
+        <ng-container *ngIf="isLoading == false">
+          <ng-container *ngIf="displayName != undefined">
+            <span>היי {{ displayName }}</span> |
+            <span class="logout" (click)="logout()">התנתק</span>
+          </ng-container>
+          <ng-container *ngIf="displayName == undefined">
+            <a class="nav-link" [routerLink]="'/login'">כניסה למשתמש קיים</a>
+            <mat-icon>account_box</mat-icon>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div class="navbar-links" [@fadeInOnEnter]>
+        <ul>
+          <li *ngIf="isAdmin">
+            <a [routerLink]="'/admin'">מסך ניהול</a>
+          </li>
+          <li *ngIf="!isAdmin && isVolunteer">
+            <a [routerLink]="'/volunteer-admin-panel'">מסך ניהול</a>
+          </li>
+          <li>
+            <a [routerLink]="'/gallery'">גלריית תמונות</a>
+          </li>
+          <li>
+            <a [routerLink]="'/about'">אודות</a>
+          </li>
+          <li>
+            <a [routerLink]="'/contact-us'">צור קשר</a>
+          </li>
+          <li>
+            <a [routerLink]="'/faq'">שאלות ותשובות</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="social-icons">
+        <img src="assets/instagram.svg" alt="Instagram" height="35" />
+        <img src="assets/facebook.svg" alt="Facebook" height="35" />
+      </div>
+    </div>
+  </ng-container>
+</mat-toolbar>

@@ -1,0 +1,80 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+mat-form-field:-webkit-autofill,
+mat-form-field:-webkit-autofill:hover,
+mat-form-field:-webkit-autofill:focus,
+.mat-form-field-flex:-webkit-autofill,
+.mat-form-field-flex:-webkit-autofill:hover,
+.mat-form-field-flex:-webkit-autofill:focus,
+.mat-form-field-infix:-webkit-autofill,
+.mat-form-field-infix:-webkit-autofill:hover,
+.mat-form-field-infix:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f26a76 !important;
+}
+
+.login-page {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.login-container .login-title-container {
+  margin-bottom: 4vh;
+}
+
+.login-container img {
+  border-radius: unset;
+  margin: auto;
+  display: block;
+  width: 175px;
+  cursor: pointer;
+}
+
+.login-container p {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 45px;
+}
+
+.logo-line {
+  color: #0b2242;
+}
+
+.login-container {
+  margin: 30px;
+}
+
+.login-form {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field input {
+  vertical-align: super;
+}
+
+.form-footer {
+  margin-top: 15px;
+}
+
+.form-footer button {
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
+.prefix mat-icon {
+  padding-right: 15px;
+  padding-left: 7px;
+}

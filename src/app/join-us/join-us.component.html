@@ -1,0 +1,109 @@
+<app-toolbar [title]="'רוצה לעזור מאחורי הקלעים?'"></app-toolbar>
+
+<section class="background" [@fadeInOnEnter] [@fadeOutOnLeave]>
+  <div class="background-container pie-{{random}}"></div>
+</section>
+
+<section class="form" [@fadeInOnEnter] [@fadeOutOnLeave]>
+  <form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="submit(form?.value)"
+    fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput type="text" placeholder="שם פרטי" formControlName="fname" id="fname" required>
+        <mat-error *ngIf="hasError('fname', 'required')">חובה להזין שם פרטי</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="שם משפחה" formControlName="lname" id="lname" required>
+        <mat-error *ngIf="hasError('lname', 'required')">חובה להזין שם משפחה</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="תעודת זהות" formControlName="personal_id" id="personal_id" required>
+        <mat-hint>כולל ספרת ביקורת</mat-hint>
+        <mat-error *ngIf="hasError('personal_id', 'required')">חובה להזין תעודת זהות</mat-error>
+        <mat-error *ngIf="hasError('personal_id', 'minlength')">חובה להזין מספר תעודת זהות תקין, כולל ספרת ביקורת</mat-error>
+        <mat-error *ngIf="hasError('personal_id', 'maxlength')">חובה להזין מספר תעודת זהות תקין, כולל ספרת ביקורת</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="email" placeholder="אימייל" formControlName="email" id="email" required>
+        <mat-error *ngIf="hasError('email', 'email')">כתובת לא תקינה</mat-error>
+      </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="tel" placeholder="מספר טלפון" formControlName="phone" id="phone" required>
+      <mat-error *ngIf="hasError('phone', 'required')">חובה להזין מספר טלפון</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="date" placeholder="תאריך לידה" formControlName="date_of_birth" id="date_of_birth">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="עיר" formControlName="city" id="city" required [matAutocomplete]="autoCities"
+      (blur)="checkCity()" autocomplete="off">
+      <mat-autocomplete autoActiveFirstOption #autoCities="matAutocomplete" (optionSelected)="cityClick($event)">
+        <mat-option *ngFor="let city of filteredCities | async" [value]="city.name">
+          {{ city.name }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="hasError('city', 'required')">חובה להזין עיר</mat-error>
+    </mat-form-field>
+
+    <div class="inner-grid">
+      <mat-form-field>
+        <input matInput type="text" placeholder="רחוב" formControlName="address" id="address" required [matAutocomplete]="autoAddresses" (blur)="checkStreet()" autocomplete="off">
+        <mat-autocomplete autoActiveFirstOption #autoAddresses="matAutocomplete"
+          (optionSelected)="streetClick($event)">
+          <mat-option *ngFor="let street of filteredStreets | async" [value]="street['שם_רחוב']">
+            {{ street['שם_רחוב'] }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="hasError('address', 'required')">חובה להזין רחוב</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="number" placeholder="מס' בית" formControlName="address_number" id="address_number" required>
+        <mat-error *ngIf="hasError('address_number', 'required')">חובה להזין מס' בית</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="סיסמא" formControlName="password" id="password" required>
+      <mat-hint>6 תווים לפחות</mat-hint>
+      <mat-error *ngIf="hasError('password', 'required')">חובה לבחור סיסמא</mat-error>
+      <mat-error *ngIf="hasError('password', 'minlength')">על הסיסמא להיות באורך 6 תווים לפחות</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="וידוא סיסמא" formControlName="password_confirm" id="password_confirm" required pattern="{{form.controls['password']?.value}}">
+      <mat-error *ngIf="hasError('password_confirm', 'required')">יש להזין את אותה הסיסמא פעם נוספת</mat-error>
+      <mat-error *ngIf="hasError('password_confirm', 'minlength')">על הסיסמא להיות באורך 6 תווים לפחות</mat-error>
+      <mat-error *ngIf="hasError('password_confirm', 'pattern')">הסיסמא אינה זהה לסיסמא שהוזנה קודם</mat-error>
+    </mat-form-field>
+
+    <div class="margin-top">
+    </div>
+    <div>
+    </div>
+
+    <mat-form-field class="height-90">
+      <label></label>
+      <input matInput type="date" placeholder="מתי תרצה\י להתחיל?" formControlName="str_date" id="str_date" required>
+      <mat-error *ngIf="hasError('str_date', 'required')">חובה לבחור תאריך התחלה רצוי</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>כמה שעות פנאי תוכל\י להקדיש בשבילנו בחודש? (להערכתך...)</label>
+      <input matInput type="number" formControlName="free_hours" id="free_hours" required>
+      <mat-error *ngIf="hasError('free_hours', 'required')">חובה להזין מספר שעות חודשי מוערך</mat-error>
+    </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="!form?.valid || isLoading==true">שמור ושלח</button>
+    </mat-card-actions>
+  </form>
+</section>

@@ -1,0 +1,71 @@
+.app-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.navbar {
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  height: 64px;
+  line-height: 64px;
+  width: 100%;
+  text-align: center;
+  gap: 7vw;
+}
+
+.nav-link {
+  color: #3f74b5;
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+.navbar-links ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  gap: 3vw;
+}
+
+.social-icons img {
+  vertical-align: middle;
+  margin: 0 7px;
+}
+
+.login mat-icon {
+  position: relative;
+  top: 6px;
+  padding-right: 5px;
+}
+
+.title-bar {
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto 60px;
+  height: 64px;
+  line-height: 64px;
+  width: 100%;
+  text-align: center;
+  gap: 7vw;
+}
+
+.title-bar .title h1 {
+  font-size: 30px;
+  line-height: 56px;
+  font-weight: bold;
+}
+
+.title-bar .home img {
+  height: 50px;
+  vertical-align: middle;
+  padding-bottom: 7px;
+  cursor: pointer;
+}
+
+.logout {
+  cursor: pointer;
+  color: red;
+}
