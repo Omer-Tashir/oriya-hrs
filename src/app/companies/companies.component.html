@@ -1,1 +1,72 @@
-<p>companies works!</p>
+<app-toolbar [auth]="auth$ | async"></app-toolbar>
+
+<div class="main-section">  
+    <section class="background" [@fadeInOnEnter] [@fadeOutOnLeave]>
+      <div class="background-container">
+        <div class="background-{{randomImage}}"></div>
+        <img src="assets/logo.png" [@fadeInRightOnEnter] />
+        <p [@fadeInRightOnEnter]>
+            רשימת חברות
+        </p>
+      </div>
+    </section>
+
+    <section class="container mat-elevation-z8">
+      <mat-form-field class="search">
+        <mat-label>חיפוש</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+    
+      <div class="loading-shade"
+           *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        <div class="rate-limit-reached" *ngIf="isRateLimitReached">
+          לא נמצאו חברות
+        </div>
+      </div>
+    
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="table"
+               matSort (matSortChange)="sortData($event)" matSortActive="name" 
+               matSortDisableClear matSortDirection="asc">
+    
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="name">שם לקוח</th>
+            <td mat-cell *matCellDef="let row">{{row.name}}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="contactName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="contactName">שם איש קשר</th>
+            <td mat-cell *matCellDef="let row">{{row.contactName}}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="contactRole">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="contactRole">תפקיד איש קשר</th>
+            <td mat-cell *matCellDef="let row">{{row.contactRole}}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="contactPhone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="contactPhone">טלפון איש קשר</th>
+            <td mat-cell *matCellDef="let row">{{row.contactPhone}}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="phone">טלפון</th>
+            <td mat-cell *matCellDef="let row">{{row.phone}}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="domain">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="domain">תחום עיסוק</th>
+            <td mat-cell *matCellDef="let row">{{row.domain}}</td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [length]="resultsLength" showFirstLastButtons></mat-paginator>
+    </section>
+</div>
+
+<app-footer></app-footer>

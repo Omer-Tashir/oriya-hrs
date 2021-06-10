@@ -9,6 +9,8 @@ import { DatePipe, CommonModule } from '@angular/common';
 // Angular Material Modules
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from './core/custom.mat.paginator.intl';
 import { CustomMaterialModule } from './core/material.module';
 
 // Third party library modules
@@ -131,6 +133,7 @@ export const CUSTOM_DATE_FORMAT = {
     Globals,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
     { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMAT },
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
   ],
   bootstrap: [AppComponent],

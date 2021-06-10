@@ -26,6 +26,9 @@
 
       <div class="navbar-links" [@fadeInOnEnter]>
         <ul>
+          <li>
+            <a [routerLink]="'/home'">ראשי</a>
+          </li>
           <li *ngIf="isAdmin">
             <a [routerLink]="'/admin'">מסך ניהול</a>
           </li>

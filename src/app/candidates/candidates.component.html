@@ -1,1 +1,19 @@
-<p>candidates works!</p>
+<app-toolbar [auth]="auth$ | async"></app-toolbar>
+
+<div class="main-section">  
+    <section class="background" [@fadeInOnEnter] [@fadeOutOnLeave]>
+      <div class="background-container">
+        <div class="background-{{randomImage}}"></div>
+        <img src="assets/logo.png" [@fadeInRightOnEnter] />
+        <p [@fadeInRightOnEnter]>
+            מועמדים
+        </p>
+      </div>
+    </section>
+
+    <section class="form">
+      
+    </section>
+</div>
+  
+<app-footer></app-footer>

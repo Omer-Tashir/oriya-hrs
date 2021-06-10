@@ -14,6 +14,7 @@ mat-form-field:-webkit-autofill:focus,
 }
 
 .login-page {
+  border-radius: 15px;
   position: fixed;
   top: 50%;
   left: 50%;
