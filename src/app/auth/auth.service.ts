@@ -18,11 +18,20 @@ export class AuthService {
   ) {}
 
   login(email: string, password: string) {
-    sessionStorage.clear();
     this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
+        this.db.getAdmins().subscribe(admins => {
+          console.log(admins);
+          const currentUser = admins.find(a => a.email === email);
+          if (!!currentUser) {
+            console.log(currentUser);
+            sessionStorage.setItem('admin', JSON.stringify(currentUser));
+          }
+        });
+
         sessionStorage.setItem('user', JSON.stringify(auth.user));
+        this.router.navigate(['']);
       })
       .catch((error: any) => {
         console.log(error);

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
   fadeInOnEnterAnimation,
@@ -7,7 +7,7 @@ import {
 
 import { DatabaseService } from '../database.service';
 import { AuthService } from '../../auth/auth.service';
-import { AlertService } from '../alerts/alert.service';
+import { Admin } from 'src/app/model/admin';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -15,49 +15,46 @@ import { AlertService } from '../alerts/alert.service';
   animations: [fadeInOnEnterAnimation(), fadeOutOnLeaveAnimation()],
 })
 export class ToolbarComponent implements OnInit {
-  @Input() title: string | undefined;
-  @Input() auth: any;
-
-  isLoading: boolean = false;
+  loggedIn: boolean = false;
   isAdmin: boolean = false;
-  displayName: any;
-  email: any;
+
+  photoLoaded = false;
+  displayName!: string;
+  email!: string;
+  image!: string;
 
   constructor(
     public db: DatabaseService,
     public afAuth: AngularFireAuth,
-    private authService: AuthService,
-    private alertService: AlertService
+    private authService: AuthService
   ) {}
-
-  authLogic(auth: any) {
-    this.displayName = auth?.displayName;
-    this.email = auth?.email;
-    this.isLoading = false;
-  }
 
   logout(): void {
     this.authService.logout();
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
-    if (this.title == undefined) {
-      if (this.auth != undefined) {
-        this.authLogic(this.auth);
-      }
-      this.afAuth.authState.subscribe(
-        (auth) => {
-          this.authLogic(auth);
-        },
-        (error) => {
-          console.log(error);
-          this.alertService.httpError(error);
-          this.isLoading = false;
-        }
-      );
-    } else {
-      this.isLoading = false;
+    const loadUser = sessionStorage.getItem('user');
+    const loadAdmin = sessionStorage.getItem('admin');
+
+    if (!!loadAdmin) {
+      const admin: Admin = JSON.parse(loadAdmin);
+      this.displayName = admin.displayName;
+      this.email = admin.email;
+      this.image = admin.image;
+      this.isAdmin = true;
+
+      this.photoLoaded = true;
+      this.loggedIn = true;
+    }
+    else if (!!loadUser) {
+      const user = JSON.parse(loadUser);
+      this.displayName = user.displayName;
+      this.email = user.email;
+      this.image = user.photoURL;
+
+      this.photoLoaded = true;
+      this.loggedIn = true;
     }
   }
 }

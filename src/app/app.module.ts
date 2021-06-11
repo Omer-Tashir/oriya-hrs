@@ -56,7 +56,6 @@ import { FooterComponent } from './core/footer/footer.component';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
-import { AdminComponent } from './admin/admin.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { CandidatesComponent } from './candidates/candidates.component';
 import { ArticlesComponent } from './articles/articles.component';
@@ -92,7 +91,6 @@ export const CUSTOM_DATE_FORMAT = {
     YearDateFormatPipe,
     DateTimeFormatPipe,
     TimeFormatPipe,
-    AdminComponent,
     CompaniesComponent,
     CandidatesComponent,
     ArticlesComponent,

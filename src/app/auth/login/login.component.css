@@ -20,7 +20,8 @@ mat-form-field:-webkit-autofill:focus,
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
-      background: white;
+  background: white;
+  box-shadow: 0 0 10px #23232354;
 }
 
 .login-container .login-title-container {

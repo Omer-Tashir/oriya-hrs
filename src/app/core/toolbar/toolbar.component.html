@@ -1,38 +1,27 @@
 <mat-toolbar>
-  <ng-container *ngIf="!isLoading">
-    <div *ngIf="title && title!='load'" class="title-bar" [@fadeInOnEnter] [@fadeOutOnLeave]>
-      <div class="title">
-        <h1>{{ title }}</h1>
-      </div>
-
-      <div class="home" [routerLink]="'/home'">
-        <img src="assets/logo.png" alt="Home" height="32" />
-      </div>
-    </div>
-
-    <div *ngIf="!title" class="navbar" [@fadeInOnEnter] [@fadeOutOnLeave]>
+    <div class="navbar">
       <div class="login">
-        <ng-container *ngIf="isLoading == false">
-          <ng-container *ngIf="displayName != undefined">
-            <span>היי {{ displayName }}</span> |
-            <span class="logout" (click)="logout()">התנתק</span>
-          </ng-container>
-          <ng-container *ngIf="displayName == undefined">
-            <a class="nav-link" [routerLink]="'/login'">כניסה למשתמש קיים</a>
-            <mat-icon>account_box</mat-icon>
-          </ng-container>
+        <ng-container *ngIf="!!loggedIn">
+          <span class="image">
+            <img [ngClass]="{'hidden': !photoLoaded}" [attr.src]="image" width="45" height="45"
+              (load)="photoLoaded = true">
+          </span>
+          <span class="display-name">{{ displayName }}</span> |
+          <span class="logout" (click)="logout()">התנתק</span>
+        </ng-container>
+
+        <ng-container *ngIf="!loggedIn">
+          <a class="nav-link" [routerLink]="'/login'">כניסה למשתמש קיים</a>
+          <mat-icon>account_box</mat-icon>
         </ng-container>
       </div>
 
-      <div class="navbar-links" [@fadeInOnEnter]>
+      <div class="navbar-links">
         <ul>
           <li>
             <a [routerLink]="'/home'">ראשי</a>
           </li>
           <li *ngIf="isAdmin">
-            <a [routerLink]="'/admin'">מסך ניהול</a>
-          </li>
-          <li>
             <a [routerLink]="'/companies'">חברות</a>
           </li>
           <li>
@@ -49,5 +38,5 @@
         <img src="assets/facebook.svg" alt="Facebook" height="35" />
       </div>
     </div>
-  </ng-container>
+
 </mat-toolbar>

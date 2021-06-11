@@ -1,13 +1,11 @@
-<app-toolbar [auth]="auth$ | async"></app-toolbar>
+<app-toolbar></app-toolbar>
 
-<div class="main-section">  
-    <section class="background" [@fadeInOnEnter] [@fadeOutOnLeave]>
+<div class="main-section" [@fadeInOnEnter]>  
+    <section class="background">
       <div class="background-container">
         <div class="background-{{randomImage}}"></div>
-        <img src="assets/logo.png" [@fadeInRightOnEnter] />
-        <p [@fadeInRightOnEnter]>
-            מאמרים
-        </p>
+        <img src="assets/logo.png" />
+        <p>מאמרים</p>
       </div>
     </section>
 </div>

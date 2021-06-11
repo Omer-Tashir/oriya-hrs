@@ -6,20 +6,14 @@ import { CompaniesComponent } from './companies/companies.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { CandidatesComponent } from './candidates/candidates.component';
 import { AuthService } from './auth/auth.service';
-
-// Admin Panel
-import { AdminComponent } from './admin/admin.component';
 import { isAdminGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'companies', component: CompaniesComponent },
+  { path: 'companies', component: CompaniesComponent, canActivate: [isAdminGuard] },
   { path: 'candidates', component: CandidatesComponent },
   { path: 'articles', component: ArticlesComponent },
-
-  // admin section
-  { path: 'admin', component: AdminComponent, canActivate: [isAdminGuard] },
 ];
 
 @NgModule({

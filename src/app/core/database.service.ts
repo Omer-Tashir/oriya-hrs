@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { from, Observable, of } from 'rxjs';
+import { Globals } from '../app.globals';
 
 import { LocalStorageService } from './local-storage-service';
+import { Candidate } from '../model/candidate';
 import { Category } from '../model/category';
 import { Company } from '../model/company';
-import { Globals } from '../app.globals';
-import { Candidate } from '../model/candidate';
+import { Admin } from '../model/admin';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,24 @@ export class DatabaseService {
     private http: HttpClient, 
     public globals: Globals
   ) { }
+
+  getAdmins(): Observable<Admin[]> {
+    if(!this.localStorageService.getItem('admins')) {
+      return this.db.collection(`admins`).get().pipe(
+        map(admins => admins.docs.map(doc => {
+          return <Admin>doc.data();
+        })),
+        tap(admins => this.localStorageService.setItem('admins', JSON.stringify(admins))),
+        catchError(err => of([])),
+        shareReplay()
+      );
+    }
+    else {
+      return of(JSON.parse(this.localStorageService.getItem('admins'))).pipe(
+        shareReplay()
+      );
+    }
+  }
 
   getCategories(): Observable<Category[]> {
     if(!this.localStorageService.getItem('categories')) {
