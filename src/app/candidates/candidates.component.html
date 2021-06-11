@@ -17,28 +17,28 @@
         fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
         <div class="form-inputs-wrapper">
           <mat-form-field>
-            <input autocomplete="new-phone" matInput [attr.type]="text" placeholder="שם פרטי" formControlName="firstName" id="firstName" required>
+            <input autocomplete="new-phone" matInput type="text" placeholder="שם פרטי" formControlName="firstName" id="firstName" required>
             <mat-error *ngIf="hasError('firstName', 'required')">חובה להזין שם פרטי</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input autocomplete="new-phone" matInput [attr.type]="text" placeholder="שם משפחה" formControlName="lastName" id="lastName" required>
+            <input autocomplete="new-phone" matInput type="text" placeholder="שם משפחה" formControlName="lastName" id="lastName" required>
             <mat-error *ngIf="hasError('lastName', 'required')">חובה להזין שם משפחה</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input autocomplete="new-phone"matInput [attr.type]="email" placeholder="אימייל" formControlName="email" id="email" required>
+            <input autocomplete="new-phone"matInput type="email" placeholder="אימייל" formControlName="email" id="email" required>
             <mat-error *ngIf="hasError('email', 'required')">חובה להזין אימייל</mat-error>
             <mat-error *ngIf="hasError('email', 'email')">כתובת לא תקינה</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input autocomplete="new-phone" matInput [attr.type]="tel" placeholder="מספר טלפון" formControlName="phone" id="phone" required>
+            <input autocomplete="new-phone" matInput type="tel" placeholder="מספר טלפון" formControlName="phone" id="phone" required>
             <mat-error *ngIf="hasError('phone', 'required')">חובה להזין מספר טלפון</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input autocomplete="new-phone" matInput [attr.type]="text" placeholder="עיר" formControlName="city" id="city" required [matAutocomplete]="autoCities"
+            <input autocomplete="new-phone" matInput type="text" placeholder="עיר" formControlName="city" id="city" required [matAutocomplete]="autoCities"
             (blur)="checkCity()" autocomplete="new-phone">
             <mat-autocomplete autoActiveFirstOption #autoCities="matAutocomplete" (optionSelected)="cityClick($event)">
               <mat-option *ngFor="let city of filteredCities | async" [value]="city.name">
@@ -50,7 +50,7 @@
       
           <div class="inner-grid">
             <mat-form-field>
-              <input autocomplete="new-phone" matInput [attr.type]="text" placeholder="רחוב" formControlName="address" id="address" required [matAutocomplete]="autoAddresses" (blur)="checkStreet()" autocomplete="new-phone">
+              <input autocomplete="new-phone" matInput type="text" placeholder="רחוב" formControlName="address" id="address" required [matAutocomplete]="autoAddresses" (blur)="checkStreet()" autocomplete="new-phone">
               <mat-autocomplete autoActiveFirstOption #autoAddresses="matAutocomplete"
                 (optionSelected)="streetClick($event)">
                 <mat-option *ngFor="let street of filteredStreets | async" [value]="street['שם_רחוב']">
@@ -61,7 +61,7 @@
             </mat-form-field>
       
             <mat-form-field>
-              <input autocomplete="new-phone" matInput [attr.type]="number" placeholder="מס' בית" formControlName="addressNumber" id="addressNumber" required>
+              <input autocomplete="new-phone" matInput type="number" placeholder="מס' בית" formControlName="addressNumber" id="addressNumber" required>
               <mat-error *ngIf="hasError('addressNumber', 'required')">חובה להזין מס' בית</mat-error>
             </mat-form-field>
           </div>
@@ -132,12 +132,14 @@
 
           <ng-container matColumnDef="cvFileLink">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="cvFileLink">קורות חיים</th>
-            <td mat-cell *matCellDef="let row">{{row.cvFileLink}}</td>
+            <td mat-cell *matCellDef="let row">
+              <span class="link" (click)="downloadCV(row.cvFileLink)">לחץ להורדה</span>
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="approve">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="approve">מאשר שליחת קורות חיים לחברות תואמות</th>
-            <td mat-cell *matCellDef="let row">{{row.approve}}</td>
+            <td mat-cell *matCellDef="let row">{{row.approve ? 'כן' : 'לא'}}</td>
           </ng-container>
     
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

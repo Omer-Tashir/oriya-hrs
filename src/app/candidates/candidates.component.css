@@ -24,3 +24,8 @@
 .submit-btn {
     margin-top: 25px;
 }
+
+.link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

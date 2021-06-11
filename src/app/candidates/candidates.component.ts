@@ -42,8 +42,16 @@ export class CandidatesComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = false;
 
-  @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort!: MatSort;
+  sort: any;
+  paginator: any;
+
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+      this.paginator = mp;
+  }
 
   selectedCity: any;
   selectedStreet: any;
@@ -198,6 +206,10 @@ export class CandidatesComponent implements OnInit, AfterViewInit {
         }
       }
     );
+  }
+
+  downloadCV(cvFileLink: any) {
+    window.open(cvFileLink, '_blank');
   }
 
   ngAfterViewInit(): void {
