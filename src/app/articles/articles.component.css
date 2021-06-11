@@ -1,0 +1,70 @@
+.articles-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.article-card {
+    margin: 15px;
+    width: 300px;
+    height: 200px;
+    background: white;
+    position: relative;
+    display: grid;
+    grid-template-rows: auto max-content max-content;
+    gap: 25px;
+    padding: 25px;
+}
+
+.article-name {
+    text-align: center;
+}
+
+.article-upload {
+    padding: 25px;
+    background: white;
+}
+
+.article-options, .article-download {
+    cursor: pointer;
+}
+
+.article-options {
+    display: grid;
+    text-align: center;
+    grid-template-columns: max-content;
+    justify-content: center;
+    gap: 10px;
+}
+
+.article-options-admin {
+    grid-template-columns: max-content max-content max-content;
+}
+
+.article-remove {
+    color: rgb(190, 58, 45);
+}
+
+.doc, .docx, .pdf, .xls, .xlsx {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.doc {
+    background-image: url("../../assets/file-types/doc.png");
+}
+
+.docx {
+    background-image: url("../../assets/file-types/docx.png");
+}
+
+.pdf {
+    background-image: url("../../assets/file-types/pdf.png");
+}
+
+.xls, .xlsx {
+    background-image: url("../../assets/file-types/xlsx.png");
+}

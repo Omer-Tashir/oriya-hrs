@@ -1,6 +1,6 @@
 <app-toolbar></app-toolbar>
 
-<div class="main-section" [@fadeInOnEnter]>  
+<div class="main-section">  
     <section class="background">
       <div class="background-container">
         <div class="background-{{randomImage}}"></div>
@@ -9,7 +9,7 @@
       </div>
     </section>
 
-    <section class="container mat-elevation-z8">
+    <section class="container mat-elevation-z8" [@fadeInOnEnter]>
       <mat-form-field class="search">
         <mat-label>חיפוש</mat-label>
         <input matInput (keyup)="applyFilter($event)" #input>

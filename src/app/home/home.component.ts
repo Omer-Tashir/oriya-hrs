@@ -8,7 +8,6 @@ import {
   fadeOutOnLeaveAnimation
 } from 'angular-animations';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 import { DatabaseService } from '../core/database.service';
 import { Category } from '../model/category';
@@ -41,9 +40,6 @@ export class HomeComponent implements OnInit {
   categories$!: Observable<Category[]>;
   companies$!: Observable<Company[]>;
 
-  arrayBuffer: any;
-  file!: File;
-
   constructor(
     public afAuth: AngularFireAuth, 
     private db: DatabaseService
@@ -54,37 +50,4 @@ export class HomeComponent implements OnInit {
     this.companies$ = this.db.getCompanies();
     this.auth$ = this.afAuth.authState;
   }
-
-  // incomingfile(event: any) {
-  //   this.file= event.target.files[0]; 
-  // }
-
-  // Upload() {
-  //     let fileReader = new FileReader();
-  //       fileReader.onload = (e) => {
-  //           this.arrayBuffer = fileReader.result;
-  //           var data = new Uint8Array(this.arrayBuffer);
-  //           var arr = new Array();
-  //           for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-  //           var bstr = arr.join("");
-  //           var workbook = XLSX.read(bstr, {type:"binary"});
-  //           var first_sheet_name = workbook.SheetNames[0];
-  //           var worksheet = workbook.Sheets[first_sheet_name];
-
-  //           const xlsx = XLSX.utils.sheet_to_json(worksheet,{raw:true});
-  //           xlsx.forEach((row: any) => {
-  //             const record = {
-  //               name: row['__EMPTY'] ?? '',
-  //               contactName: row['משאבי אנוש - כל הזכויות שמורות לועדים הוצאה לאור בע"מ'] ?? '',
-  //               contactRole: row['__EMPTY_1'] ?? '',
-  //               contactPhone: row['__EMPTY_3'] ?? '',
-  //               phone: row['__EMPTY_2'] ?? '',
-  //               domain: row['__EMPTY_4'] ?? '',
-  //             } as Company;
-  //             //this.db.putCompany(record);
-  //           });
-  //           console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
-  //       }
-  //       fileReader.readAsArrayBuffer(this.file);
-  // }
 }

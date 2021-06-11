@@ -7,4 +7,5 @@ export class Candidate {
     address!: string;
     addressNumber!: string;
     cvFileLink!: string;
+    approve!: string;
 }

@@ -20,7 +20,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 
 // Application modules
@@ -59,6 +59,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { CandidatesComponent } from './candidates/candidates.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { UploadFormComponent } from './core/upload-form/upload-form.component';
+import { UploadDetailsComponent } from './core/upload-details/upload-details.component';
 
 export const CUSTOM_DATE_FORMAT = {
   parse: {
@@ -94,6 +96,8 @@ export const CUSTOM_DATE_FORMAT = {
     CompaniesComponent,
     CandidatesComponent,
     ArticlesComponent,
+    UploadFormComponent,
+    UploadDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -110,7 +114,7 @@ export const CUSTOM_DATE_FORMAT = {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    AngularFireDatabaseModule,
+    AngularFireStorageModule,
   ],
   entryComponents: [
     OkSnackComponent,

@@ -1,0 +1,26 @@
+.form {
+    padding: 25px;
+}
+
+.form-inputs-wrapper {
+    display: grid;
+    background: white;
+    grid-template-columns: 300px 300px;
+    gap: 50px;
+    padding: 25px;
+}
+
+.inner-grid {
+    display: grid;
+    grid-template-columns: 200px 100px;
+    gap: 25px;
+}
+
+.approve, .cv {
+    padding: 25px;
+    background: white;
+}
+
+.submit-btn {
+    margin-top: 25px;
+}

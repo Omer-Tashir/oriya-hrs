@@ -1,12 +1,38 @@
 <app-toolbar></app-toolbar>
 
-<div class="main-section" [@fadeInOnEnter]>  
+<div class="main-section">  
     <section class="background">
       <div class="background-container">
         <div class="background-{{randomImage}}"></div>
         <img src="assets/logo.png" />
         <p>מאמרים</p>
       </div>
+    </section>
+
+    <section class="articles" [@fadeInOnEnter]>
+      <div class="articles-container" @listAnimation>
+        <ng-container *ngIf="(articles$ | async) as articles">
+          <div *ngFor="let article of articles" @item>
+            <ng-container *ngIf="(article.url | async) as url">
+              <div class="article-card">
+                <div class="article-background {{getFileType(article.name)}}"></div>
+                <div class="article-name">{{article.name}}</div>
+                <div class="article-options" [class.article-options-admin]="isAdmin">
+                  <h4 class="article-download" (click)="download(url)">צפה במאמר</h4>
+                  <h4 *ngIf="isAdmin">|</h4>
+                  <h4 *ngIf="isAdmin" class="article-remove" (click)="delete(article.name)">מחק</h4>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="article-upload" *ngIf="isAdmin">
+        <h3>העלאת מאמר חדש</h3>
+        <app-upload-form [path]="'articles'" [title]="''" (uploadFileEmitter)="reload()"></app-upload-form>
+      </div>
+
     </section>
 </div>
   
