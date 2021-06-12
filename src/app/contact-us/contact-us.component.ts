@@ -64,7 +64,7 @@ export class ContactUsComponent implements OnInit {
         Username : "oriyacv@gmail.com",
         Password : "846C3C7AFFE08CD5E28566125C502014A3DC",
         From : "oriyacv@gmail.com",
-        To : "adirik@oriya-hrs.com",
+        To : "saviv3@gmail.com",
         Subject : "התקבלה פנייה חדשה באתר",
         Body : `
           תאריך: ${moment(new Date()).format('DD/MM/YYYY')}

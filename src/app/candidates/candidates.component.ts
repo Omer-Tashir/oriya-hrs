@@ -17,6 +17,7 @@ import { AlertService } from '../core/alerts/alert.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { CandidateStatus } from '../model/candidate-status';
 
 @Component({
   selector: 'app-candidates',
@@ -28,12 +29,13 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class CandidatesComponent implements OnInit, AfterViewInit {
   randomImage: number = Math.floor(Math.random() * 6) + 1;
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'phone', 'city', 'address', 'cvFileLink', 'approve'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'phone', 'city', 'address', 'cvFileLink', 'approve', 'status'];
   form: FormGroup = new FormGroup({});
   isAdmin: boolean = false;
 
   auth$!: Observable<any>;
   candidates$!: Observable<Candidate[]>;
+  statuses$!: Observable<CandidateStatus[]>;
   cvLoaded = false;
 
   dataSource!: MatTableDataSource<Candidate>;
@@ -93,6 +95,7 @@ export class CandidatesComponent implements OnInit, AfterViewInit {
         case 'address': return this.compare(a.address, b.address, isAsc);
         case 'cvFileLink': return this.compare(a.cvFileLink, b.cvFileLink, isAsc);
         case 'approve': return this.compare(a.approve, b.approve, isAsc);
+        case 'status': return this.compare(a.status, b.status, isAsc);
         default: return 0;
       }
     });
@@ -166,6 +169,7 @@ export class CandidatesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.candidates$ = this.db.getCandidates();
+    this.statuses$ = this.db.getCandidateStatuses();
     this.auth$ = this.afAuth.authState;
 
     this.form = new FormGroup({
@@ -178,6 +182,7 @@ export class CandidatesComponent implements OnInit, AfterViewInit {
       addressNumber: new FormControl('', [Validators.required]),
       cvFileLink: new FormControl('', [Validators.nullValidator]),
       approve: new FormControl(true, [Validators.nullValidator]),
+      status: new FormControl('מועמד חדש', [Validators.nullValidator]),
     });
 
     this.db.getCitiesJSON().subscribe(data => {
@@ -205,6 +210,10 @@ export class CandidatesComponent implements OnInit, AfterViewInit {
         }
       }
     );
+  }
+
+  updateStatus(candidate: Candidate, status: string) {
+    this.db.putCandidateStatus(candidate, status);
   }
 
   downloadCV(cvFileLink: any) {
@@ -242,6 +251,8 @@ export class CandidatesComponent implements OnInit, AfterViewInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.sortData({ active: 'email', direction: 'asc' });
+
+          console.log(this.dataSource.data);
         });
     }
   }

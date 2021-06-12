@@ -13,6 +13,7 @@ import { Company } from '../model/company';
 import { Admin } from '../model/admin';
 import { EmploymentType } from '../model/employment-type';
 import { JobOffer } from '../model/job-offer';
+import { CandidateStatus } from '../model/candidate-status';
 
 @Injectable({
   providedIn: 'root',
@@ -119,7 +120,10 @@ export class DatabaseService {
     if(!this.localStorageService.getItem('candidates')) {
       return this.db.collection(`candidates`).get().pipe(
         map(candidates => candidates.docs.map(doc => {
-          return <Candidate>doc.data();
+          let candidate: Candidate = <Candidate>doc.data();
+          candidate.uid = doc.id;
+          console.log(candidate);
+          return candidate;
         })),
         tap(candidates => this.localStorageService.setItem('candidates', JSON.stringify(candidates))),
         catchError(err => of([])),
@@ -133,28 +137,53 @@ export class DatabaseService {
     }
   }
 
+  getCandidateStatuses(): Observable<CandidateStatus[]> {
+    if(!this.localStorageService.getItem('candidate-statuses')) {
+      return this.db.collection(`candidate-statuses`).get().pipe(
+        map(candidateStatuses => candidateStatuses.docs.map(doc => {
+          return <CandidateStatus>doc.data();
+        })),
+        tap(candidateStatuses => this.localStorageService.setItem('candidate-statuses', JSON.stringify(candidateStatuses))),
+        catchError(err => of([])),
+        shareReplay()
+      );
+    }
+    else {
+      return of(JSON.parse(this.localStorageService.getItem('candidate-statuses'))).pipe(
+        shareReplay()
+      );
+    }
+  }
+
   putRegisteredCompany(company: RegisteredCompany): Observable<void> {
-    return from(this.db.collection(`registered-companies`).doc(this.db.createId()).set(company)).pipe(
-      tap(() => this.localStorageService.removeItem('registered-companies'))
-    );
+    return from(this.db.collection(`registered-companies`).doc(this.db.createId()).set(company).then(() => {
+      this.localStorageService.removeItem('registered-companies');
+    }));
+  }
+
+  putCandidateStatus(candidate: Candidate, status: string): Observable<void> {
+    candidate.status = status;
+    return from(this.db.collection(`candidates`).doc(candidate.uid).set(candidate).then(() => {
+      this.localStorageService.removeItem('candidates');
+    }));
   }
 
   putCompany(company: Company): Observable<void> {
-    return from(this.db.collection(`companies`).doc(this.db.createId()).set(company)).pipe(
-      tap(() => this.localStorageService.removeItem('companies'))
-    );
+    return from(this.db.collection(`companies`).doc(this.db.createId()).set(company).then(() => {
+      this.localStorageService.removeItem('companies');
+    }));
   }
 
   putCandidate(candidate: Candidate): Observable<void> {
-    return from(this.db.collection(`candidates`).doc(this.db.createId()).set(candidate)).pipe(
-      tap(() => this.localStorageService.removeItem('candidates'))
-    );
+    return from(this.db.collection(`candidates`).doc(this.db.createId()).set(candidate).then(() => {
+      this.localStorageService.removeItem('candidates');
+    }));
   }
 
   putJobOffer(offer: JobOffer): Observable<void> {
-    return from(this.db.collection(`job-offers`).doc(this.db.createId()).set(offer)).pipe(
-      tap(() => this.localStorageService.removeItem('job-offers'))
-    );
+    return from(this.db.collection(`job-offers`).doc(this.db.createId()).set(offer).then(() => {
+      this.localStorageService.removeItem('job-offers');
+    }));
   }
 
   getCitiesJSON(): Observable<any> {

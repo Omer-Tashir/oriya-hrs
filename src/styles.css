@@ -497,6 +497,7 @@ td.mat-cell {
   font-weight: 100;
   font-size: 14px;
   text-align: right;
+  padding: 0 15px !important;
 }
 
 .mat-fab .mat-button-wrapper {

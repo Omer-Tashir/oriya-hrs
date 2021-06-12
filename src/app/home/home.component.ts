@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
   randomImage2: number = Math.floor(Math.random() * 6) + 1;
 
   isCompany = false;
+  isAdmin = false;
   auth$!: Observable<any>;
   categories$!: Observable<Category[]>;
   companies$!: Observable<Company[]>;
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
     private db: DatabaseService
   ) { 
     this.isCompany = !!sessionStorage.getItem('company');
+    this.isAdmin = !!sessionStorage.getItem('admin');
   }
 
   ngOnInit(): void {

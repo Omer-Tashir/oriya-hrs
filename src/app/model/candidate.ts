@@ -1,4 +1,5 @@
 export class Candidate {
+    uid!: string;
     firstName!: string;
     lastName!: string;
     email!: string;
@@ -8,4 +9,5 @@ export class Candidate {
     addressNumber!: string;
     cvFileLink!: string;
     approve!: string;
+    status: string = 'מועמד חדש';
 }
