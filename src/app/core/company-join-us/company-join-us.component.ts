@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-    fadeInLeftOnEnterAnimation,
+    fadeInOnEnterAnimation,
   } from 'angular-animations';
 
 @Component({
@@ -9,7 +9,7 @@ import {
     templateUrl: './company-join-us.component.html',
     styleUrls: ['./company-join-us.component.css'],
     animations: [
-        fadeInLeftOnEnterAnimation()
+        fadeInOnEnterAnimation()
     ]
   })
   export class CompanyJoinUsComponent implements OnInit {

@@ -26,7 +26,18 @@ export class CompanySignUpComponent implements OnInit {
       phone: ['', Validators.nullValidator],
       email: ['', Validators.required],
       password: ['', Validators.required],
+      image: ['', Validators.nullValidator],
     });
+  }
+
+  onSelectImage(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.formGroup.controls['image'].setValue(event.target.result);
+      }
+    }
   }
 
   submit() {
@@ -40,7 +51,8 @@ export class CompanySignUpComponent implements OnInit {
         this.formGroup.get('name')?.value,
         this.formGroup.get('phone')?.value,
         this.formGroup.get('email')?.value,
-        this.formGroup.get('password')?.value
+        this.formGroup.get('password')?.value,
+        this.formGroup.get('image')?.value
       );
     }
     else {

@@ -11,7 +11,7 @@
 
 .inner-grid {
     display: grid;
-    grid-template-columns: 300px 300px;
+    grid-template-columns: max-content max-content max-content;
     gap: 25px;
 }
 
@@ -22,4 +22,8 @@
 .link:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
 }

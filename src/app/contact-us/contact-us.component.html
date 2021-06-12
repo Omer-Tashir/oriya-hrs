@@ -1,0 +1,49 @@
+<app-toolbar></app-toolbar>
+
+<div class="main-section">  
+    <section class="background">
+      <div class="background-container">
+        <div class="background-{{randomImage}}"></div>
+        <img src="assets/logo.png" />
+        <p>יצירת קשר</p>
+      </div>
+    </section>
+
+    <section class="container mat-elevation-z8" [@fadeInOnEnter]>
+        <h2>כיצד נוכל לסייע לכם?</h2>
+        <form class="contact" [formGroup]="form" method="post" (ngSubmit)="onSubmit()">
+            <mat-form-field>
+              <mat-label>שם</mat-label>
+              <input matInput [formControl]="name" required>
+              <mat-error *ngIf="name.invalid">חובה להזין שם</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>טלפון</mat-label>
+                <input matInput [formControl]="phone" type="tel" required>
+                <mat-error *ngIf="phone.invalid">חובה להזין טלפון</mat-error>
+              </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>אימייל</mat-label>
+              <input matInput [formControl]="email" placeholder="email@example.com" type="email" required>
+              <mat-error *ngIf="email.invalid">כתובת מייל לא תקינה</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>הודעה</mat-label>
+              <textarea matInput [formControl]="message" rows="5" placeholder="תוכן ההודעה שלכם" required></textarea>
+              <mat-error *ngIf="message.invalid">חובה להזין הודעה</mat-error>
+            </mat-form-field>
+
+            <button [disabled]="isLoading" class="submit" type="submit">שלח</button>
+            <input [formControl]="honeypot" class="hidden" type="text" />
+
+            <div [ngClass]="!submitted? 'hidden' : 'visible'" class="center-text">
+              <span>{{responseMessage}}</span>
+            </div>
+          </form>
+    </section>
+</div>
+
+<app-footer></app-footer>

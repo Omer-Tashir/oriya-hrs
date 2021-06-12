@@ -14,6 +14,12 @@
         <form [formGroup]="form" autocomplete="new-phone" novalidate
         fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
         <div class="form-inputs-wrapper">
+            <div class="input-field">
+                <p>בחרו תמונה לתיאור המשרה</p>
+                <img *ngIf="!!form.controls['image'].value" [src]="form.controls['image'].value" width="100" height="100"> <br/>
+                <input type="file" placeholder="בחר תמונה" id="image" (change)="onSelectImage($event)">
+            </div>
+
         <div class="inner-grid">
             <mat-form-field class="input-field">
                 <input autocomplete="new-phone" matInput type="text" placeholder="תפקיד" formControlName="role" id="role" required>
@@ -30,6 +36,15 @@
                 </mat-autocomplete>
                 <mat-error *ngIf="hasError('city', 'required')">חובה להזין עיר</mat-error>
             </mat-form-field>
+
+            <mat-form-field class="input-field" *ngIf="(employmentTypes$ | async) as employmentTypes">
+                <mat-label>היקף משרה</mat-label>
+                <mat-select formControlName="employmentType" id="employmentType">
+                  <mat-option *ngFor="let type of employmentTypes" [value]="type.id">
+                    {{type.name}}
+                  </mat-option>
+                </mat-select>
+                </mat-form-field>
         </div>
 
           <mat-form-field>

@@ -11,6 +11,7 @@ import { CandidatesComponent } from './candidates/candidates.component';
 import { SalarySurveyComponent } from './salary-survey/salary-survey.component';
 import { CompanySignUpComponent } from './company-sign-up/company-sign-up.component';
 import { CompanyNewJobOfferComponent } from './company-new-job-offer/company-new-job-offer.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'articles', component: ArticlesComponent },
   { path: 'company-sign-up', component: CompanySignUpComponent },
   { path: 'company-new-job-offer', component: CompanyNewJobOfferComponent, canActivate: [isCompanyGuard] },
+  { path: 'contact-us', component: ContactUsComponent },
 ];
 
 @NgModule({

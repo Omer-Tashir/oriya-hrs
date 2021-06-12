@@ -11,6 +11,8 @@ import { Candidate } from '../model/candidate';
 import { Category } from '../model/category';
 import { Company } from '../model/company';
 import { Admin } from '../model/admin';
+import { EmploymentType } from '../model/employment-type';
+import { JobOffer } from '../model/job-offer';
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +56,24 @@ export class DatabaseService {
     }
     else {
       return of(JSON.parse(this.localStorageService.getItem('categories'))).pipe(
+        shareReplay()
+      );
+    }
+  }
+
+  getEmploymentTypes(): Observable<EmploymentType[]> {
+    if(!this.localStorageService.getItem('employment-types')) {
+      return this.db.collection(`employment-types`).get().pipe(
+        map(employmentTypes => employmentTypes.docs.map(doc => {
+          return <EmploymentType>doc.data();
+        })),
+        tap(employmentTypes => this.localStorageService.setItem('employment-types', JSON.stringify(employmentTypes))),
+        catchError(err => of([])),
+        shareReplay()
+      );
+    }
+    else {
+      return of(JSON.parse(this.localStorageService.getItem('employment-types'))).pipe(
         shareReplay()
       );
     }
@@ -128,6 +148,12 @@ export class DatabaseService {
   putCandidate(candidate: Candidate): Observable<void> {
     return from(this.db.collection(`candidates`).doc(this.db.createId()).set(candidate)).pipe(
       tap(() => this.localStorageService.removeItem('candidates'))
+    );
+  }
+
+  putJobOffer(offer: JobOffer): Observable<void> {
+    return from(this.db.collection(`job-offers`).doc(this.db.createId()).set(offer)).pipe(
+      tap(() => this.localStorageService.removeItem('job-offers'))
     );
   }
 

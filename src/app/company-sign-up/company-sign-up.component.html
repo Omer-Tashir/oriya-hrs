@@ -61,7 +61,12 @@
             spellcheck="false"
           />
         </mat-form-field>
-  
+
+        <div class="form-field" *ngIf="newCompany">
+          <span>בחרו תמונה</span>
+          <input type="file" placeholder="בחר תמונה" (change)="onSelectImage($event)">
+        </div>  
+
         <div class="form-footer">
           <button
             mat-raised-button

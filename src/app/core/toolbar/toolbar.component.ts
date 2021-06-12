@@ -50,26 +50,25 @@ export class ToolbarComponent implements OnInit {
       this.displayName = admin.displayName;
       this.email = admin.email;
       this.image = admin.image;
-      this.isAdmin = true;
 
-      this.photoLoaded = true;
-      this.loggedIn = true;
+      this.isAdmin = true;
     }
-    if (!!loadCompany) {
+    else if (!!loadCompany) {
       const company: RegisteredCompany = JSON.parse(loadCompany);
       this.displayName = company.name;
       this.email = company.email;
+      this.image = company.image;
+      
       this.isCompany = true;
-
-      this.photoLoaded = true;
-      this.loggedIn = true;
     }
     else if (!!loadUser) {
       const user = JSON.parse(loadUser);
       this.displayName = user.displayName;
       this.email = user.email;
       this.image = user.photoURL;
+    }
 
+    if(!!loadAdmin || !!loadCompany || !!loadUser) {
       this.photoLoaded = true;
       this.loggedIn = true;
     }

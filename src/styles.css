@@ -56,7 +56,7 @@ a:hover {
 .mat-toolbar-single-row {
   background: black;
   position: fixed;
-  z-index: 99999;
+  z-index: 999;
   padding: 0 5vw !important;
 }
 

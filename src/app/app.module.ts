@@ -65,6 +65,7 @@ import { SalarySurveyComponent } from './salary-survey/salary-survey.component';
 import { CompanyJoinUsComponent } from './core/company-join-us/company-join-us.component';
 import { CompanyNewJobOfferComponent } from './company-new-job-offer/company-new-job-offer.component';
 import { CompanySignUpComponent } from './company-sign-up/company-sign-up.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 export const CUSTOM_DATE_FORMAT = {
   parse: {
@@ -105,7 +106,8 @@ export const CUSTOM_DATE_FORMAT = {
     SalarySurveyComponent,
     CompanyJoinUsComponent,
     CompanyNewJobOfferComponent,
-    CompanySignUpComponent
+    CompanySignUpComponent,
+    ContactUsComponent
   ],
   imports: [
     CommonModule,

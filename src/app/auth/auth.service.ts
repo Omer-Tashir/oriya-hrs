@@ -58,8 +58,8 @@ export class AuthService {
       });
   }
   
-  companyRegister(name: string, phone: string, email: string, password: string) {
-    let newCompany: RegisteredCompany = Object.assign({name, phone, email}, new RegisteredCompany);
+  companyRegister(name: string, phone: string, email: string, password: string, image: string) {
+    let newCompany: RegisteredCompany = Object.assign({name, phone, email, image}, new RegisteredCompany);
 
     this.afAuth.
     createUserWithEmailAndPassword(email, password)
