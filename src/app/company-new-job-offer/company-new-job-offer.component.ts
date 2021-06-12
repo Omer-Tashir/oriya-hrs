@@ -27,7 +27,7 @@ import { RegisteredCompany } from '../model/registered-company';
   ]
 })
 export class CompanyNewJobOfferComponent implements OnInit {
-  randomImage: number = Math.floor(Math.random() * 6) + 1;
+  randomImage: number = Math.floor(Math.random() * 10) + 1;
   form: FormGroup = new FormGroup({});
   auth$!: Observable<any>;
   company!: RegisteredCompany;

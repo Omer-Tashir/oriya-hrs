@@ -1,9 +1,9 @@
-.categories-title {
+.categories-title, .job-offers-title {
   font-size: 22px;
   margin: 30px;
 }
 
-.categories {
+.categories, .job-offers {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -11,11 +11,11 @@
   padding: 25px;
 }
 
-.categories .category {
+.categories .category, .job-offers .job-offer {
   margin: 15px;
 }
 
-.categories .category .category-item {
+.categories .category .category-item, .job-offers .job-offer .job-offer-item {
   text-align: center;
   font-size: 18px;
   display: flex;
@@ -23,7 +23,7 @@
   gap: 15px;
 }
 
-.categories .category .category-item img {
+.categories .category .category-item img, .job-offers .job-offer .job-offer-item img {
   object-fit: cover;
   object-position: center;
 }
@@ -51,4 +51,63 @@
   height: 100%;
   display: block;
   margin: auto;
+}
+
+.offer-grid {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.offer-grid p {
+  font-size: 14px;
+}
+
+.employment-type {
+  pointer-events: none;
+  border-radius: 10px;
+  padding: 2px 10px;
+  margin: auto;
+  line-height: 2;
+  width: fit-content;
+}
+
+button {
+  cursor: pointer;
+	background-color: transparent;
+	color: black;
+	border: 1px solid black;
+	padding: 4px 16px;
+	transition: 0.4s;
+	width: 100%;
+  padding: 10px;
+}
+
+button:hover:enabled{
+	color: white;
+	background-color: black;
+}
+
+button:last-child{
+  margin-bottom: 10px;
+}
+
+.company-image {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  border-radius: 50%;
+  vertical-align: sub;
+  margin: 0 2px 0 5px;
+}
+
+.submit-buutons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex-flow: row;
+  align-items: baseline;
+  margin-top: 10px;
 }

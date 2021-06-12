@@ -5,4 +5,5 @@ export class JobOffer {
     employmentType!: string;
     image!: string;
     role!: string;
+    photoLoaded: boolean = false;
 }

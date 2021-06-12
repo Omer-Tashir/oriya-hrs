@@ -26,7 +26,7 @@ import { Company } from '../model/company';
   ]
 })
 export class CompaniesComponent implements OnInit, AfterViewInit {
-  randomImage: number = Math.floor(Math.random() * 6) + 1;
+  randomImage: number = Math.floor(Math.random() * 10) + 1;
   displayedColumns: string[] = ['name', 'contactName', 'contactRole', 'contactPhone', 'phone', 'domain'];
 
   auth$!: Observable<any>;

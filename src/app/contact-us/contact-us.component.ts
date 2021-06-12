@@ -21,7 +21,7 @@ declare let Email: any;
   ]
 })
 export class ContactUsComponent implements OnInit {
-  randomImage: number = Math.floor(Math.random() * 6) + 1;
+  randomImage: number = Math.floor(Math.random() * 10) + 1;
 
   form: FormGroup;
   name: FormControl = new FormControl("", [Validators.required]);

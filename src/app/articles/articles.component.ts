@@ -31,7 +31,7 @@ import { StorageService } from '../core/storage.service';
     ])],
 })
 export class ArticlesComponent implements OnInit {
-  randomImage: number = Math.floor(Math.random() * 6) + 1;
+  randomImage: number = Math.floor(Math.random() * 10) + 1;
   articles$!: Observable<any>;
   auth$!: Observable<any>;
   isAdmin: boolean = false;

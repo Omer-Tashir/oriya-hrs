@@ -28,7 +28,7 @@ import { CandidateStatus } from '../model/candidate-status';
   ]
 })
 export class CandidatesComponent implements OnInit, AfterViewInit {
-  randomImage: number = Math.floor(Math.random() * 6) + 1;
+  randomImage: number = Math.floor(Math.random() * 10) + 1;
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'phone', 'city', 'address', 'cvFileLink', 'approve', 'status'];
   form: FormGroup = new FormGroup({});
   isAdmin: boolean = false;

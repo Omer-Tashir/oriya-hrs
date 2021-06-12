@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data?.offer?.role}} בחברת {{data?.offer?.companyName}}</h1>
+
+<div mat-dialog-content>
+  {{data?.offer?.description}}
+
+  <br><br>
+  <p>עיר: {{data?.offer?.city}}</p>
+  <p>סוג המשרה: {{data?.employmentType?.name}}</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">סגור</button>
+</div>

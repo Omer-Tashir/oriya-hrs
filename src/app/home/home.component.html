@@ -29,7 +29,33 @@
       </p>
     </div>
   </section>
-  
+
+  <ng-container *ngIf="(jobOffers$ | async) as jobOffers">
+  <section *ngIf="jobOffers.length>0" class="job-offers-section" [@fadeInOnEnter] [@fadeOutOnLeave]>
+      <p class="job-offers-title">משרות חדשות באתר:</p>
+      <div class="job-offers" @listAnimation>
+        <div class="job-offer" *ngFor="let offer of jobOffers" @item>
+          <div class="job-offer-item">
+            <img [ngClass]="{'hidden': !offer.photoLoaded}" [attr.src]="offer.image" width="300" height="200"
+              (load)="offer.photoLoaded = true">
+              <p class="role">{{offer.role}}</p>
+              <div class="offer-grid">
+                <p class="company">מעסיק: <img *ngIf="!!getCompanyImage(offer.companyName)" class="company-image" [src]="getCompanyImage(offer.companyName)">{{offer.companyName}}</p>
+                <p class="city">עיר: {{offer.city}}</p>
+              </div>
+
+              <mat-chip class="employment-type">{{getEmploymentType(offer.employmentType)?.name}}</mat-chip>
+
+              <div class="submit-buutons">
+                <button class="submit" (click)="showMore(offer)">פרטים נוספים</button>
+                <button class="submit" [routerLink]="['/candidates']">הגש מועמדות</button>
+              </div>
+          </div>
+        </div>
+      </div>
+  </section>
+</ng-container>
+
   <section class="categories-section" [@fadeInOnEnter] [@fadeOutOnLeave]>
     <ng-container *ngIf="(categories$ | async) as categories">
       <p class="categories-title">התחומים אליהם אנחנו מגייסים:</p>

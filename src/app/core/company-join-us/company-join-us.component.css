@@ -5,12 +5,12 @@
 
 mat-icon {
     color: white;
-    vertical-align: middle;
+    vertical-align: text-bottom !important;
     padding-right: 3px;
 }
 
 button {
-    background: rgb(44 44 44 / 70%);
+    background: rgb(44 44 44);
     border-bottom: 4px solid rgb(28 28 28 / 70%);
     padding: 10px 25px;
 }

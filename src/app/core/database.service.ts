@@ -116,6 +116,24 @@ export class DatabaseService {
     }
   }
 
+  getJobOffers(): Observable<JobOffer[]> {
+    if(!this.localStorageService.getItem('job-offers')) {
+      return this.db.collection(`job-offers`).get().pipe(
+        map(jobOffers => jobOffers.docs.map(doc => {
+          return <JobOffer>doc.data();
+        })),
+        tap(jobOffers => this.localStorageService.setItem('job-offers', JSON.stringify(jobOffers))),
+        catchError(err => of([])),
+        shareReplay()
+      );
+    }
+    else {
+      return of(JSON.parse(this.localStorageService.getItem('job-offers'))).pipe(
+        shareReplay()
+      );
+    }
+  }
+
   getCandidates(): Observable<Candidate[]> {
     if(!this.localStorageService.getItem('candidates')) {
       return this.db.collection(`candidates`).get().pipe(

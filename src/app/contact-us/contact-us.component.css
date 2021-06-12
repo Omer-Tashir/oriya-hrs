@@ -15,7 +15,7 @@
 form.contact {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     min-width: 300px;
     margin-left: auto;
     margin-right: auto;
@@ -39,4 +39,15 @@ button {
 button:hover:enabled{
 	color: white;
 	background-color: black;
+}
+.form-wrapper {
+	position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5vw;
+}
+
+.background-container {
+	width: 100%;
+    height: 100%;
 }

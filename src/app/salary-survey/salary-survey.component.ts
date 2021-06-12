@@ -30,7 +30,7 @@ import {
     ])],
 })
 export class SalarySurveyComponent implements OnInit {
-  randomImage: number = Math.floor(Math.random() * 6) + 1;
+  randomImage: number = Math.floor(Math.random() * 10) + 1;
   articles$!: Observable<any>;
   auth$!: Observable<any>;
   isAdmin: boolean = false;

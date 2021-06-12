@@ -11,7 +11,8 @@
 
     <section class="container mat-elevation-z8" [@fadeInOnEnter]>
         <h2>כיצד נוכל לסייע לכם?</h2>
-        <form class="contact" [formGroup]="form" method="post" (ngSubmit)="onSubmit()">
+        <div class="form-wrapper">
+          <form class="contact" [formGroup]="form" method="post" (ngSubmit)="onSubmit()">
             <mat-form-field>
               <mat-label>שם</mat-label>
               <input matInput [formControl]="name" required>
@@ -43,6 +44,11 @@
               <span>{{responseMessage}}</span>
             </div>
           </form>
+
+          <div class="background-container">
+            <div class="background-{{randomImage}}"></div>
+          </div>
+        </div>
     </section>
 </div>
 
