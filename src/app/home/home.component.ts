@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
   }
 
   showMore(offer: JobOffer) {
-    const dialogRef = this.dialog.open(OfferDialog, {
+    this.dialog.open(OfferDialog, {
       width: '75vw',
       data: {
         offer: offer,

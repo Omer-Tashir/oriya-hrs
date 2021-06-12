@@ -5,7 +5,7 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { from, Observable, of } from 'rxjs';
 import { Globals } from '../app.globals';
 
-import { LocalStorageService } from './local-storage-service';
+import { SessionStorageService } from './session-storage-service';
 import { RegisteredCompany } from '../model/registered-company';
 import { Candidate } from '../model/candidate';
 import { Category } from '../model/category';
@@ -20,122 +20,122 @@ import { CandidateStatus } from '../model/candidate-status';
 })
 export class DatabaseService {
   constructor(
-    private localStorageService: LocalStorageService,
+    private SessionStorageService: SessionStorageService,
     private db: AngularFirestore, 
     private http: HttpClient, 
     public globals: Globals
   ) { }
 
   getAdmins(): Observable<Admin[]> {
-    if(!this.localStorageService.getItem('admins')) {
+    if(!this.SessionStorageService.getItem('admins')) {
       return this.db.collection(`admins`).get().pipe(
         map(admins => admins.docs.map(doc => {
           return <Admin>doc.data();
         })),
-        tap(admins => this.localStorageService.setItem('admins', JSON.stringify(admins))),
+        tap(admins => this.SessionStorageService.setItem('admins', JSON.stringify(admins))),
         catchError(err => of([])),
         shareReplay()
       );
     }
     else {
-      return of(JSON.parse(this.localStorageService.getItem('admins'))).pipe(
+      return of(JSON.parse(this.SessionStorageService.getItem('admins'))).pipe(
         shareReplay()
       );
     }
   }
 
   getCategories(): Observable<Category[]> {
-    if(!this.localStorageService.getItem('categories')) {
+    if(!this.SessionStorageService.getItem('categories')) {
       return this.db.collection(`categories`).get().pipe(
         map(categories => categories.docs.map(doc => {
           return <Category>doc.data();
         })),
-        tap(categories => this.localStorageService.setItem('categories', JSON.stringify(categories))),
+        tap(categories => this.SessionStorageService.setItem('categories', JSON.stringify(categories))),
         catchError(err => of([])),
         shareReplay()
       );
     }
     else {
-      return of(JSON.parse(this.localStorageService.getItem('categories'))).pipe(
+      return of(JSON.parse(this.SessionStorageService.getItem('categories'))).pipe(
         shareReplay()
       );
     }
   }
 
   getEmploymentTypes(): Observable<EmploymentType[]> {
-    if(!this.localStorageService.getItem('employment-types')) {
+    if(!this.SessionStorageService.getItem('employment-types')) {
       return this.db.collection(`employment-types`).get().pipe(
         map(employmentTypes => employmentTypes.docs.map(doc => {
           return <EmploymentType>doc.data();
         })),
-        tap(employmentTypes => this.localStorageService.setItem('employment-types', JSON.stringify(employmentTypes))),
+        tap(employmentTypes => this.SessionStorageService.setItem('employment-types', JSON.stringify(employmentTypes))),
         catchError(err => of([])),
         shareReplay()
       );
     }
     else {
-      return of(JSON.parse(this.localStorageService.getItem('employment-types'))).pipe(
+      return of(JSON.parse(this.SessionStorageService.getItem('employment-types'))).pipe(
         shareReplay()
       );
     }
   }
 
   getRegisteredCompanies(): Observable<RegisteredCompany[]> {
-    if(!this.localStorageService.getItem('registered-companies')) {
+    if(!this.SessionStorageService.getItem('registered-companies')) {
       return this.db.collection(`registered-companies`).get().pipe(
         map(registeredCompanies => registeredCompanies.docs.map(doc => {
           return <RegisteredCompany>doc.data();
         })),
-        tap(registeredCompanies => this.localStorageService.setItem('registered-companies', JSON.stringify(registeredCompanies))),
+        tap(registeredCompanies => this.SessionStorageService.setItem('registered-companies', JSON.stringify(registeredCompanies))),
         catchError(err => of([])),
         shareReplay()
       );
     }
     else {
-      return of(JSON.parse(this.localStorageService.getItem('registered-companies'))).pipe(
+      return of(JSON.parse(this.SessionStorageService.getItem('registered-companies'))).pipe(
         shareReplay()
       );
     }
   }
 
   getCompanies(): Observable<Company[]> {
-    if(!this.localStorageService.getItem('companies')) {
+    if(!this.SessionStorageService.getItem('companies')) {
       return this.db.collection(`companies`).get().pipe(
         map(companies => companies.docs.map(doc => {
           return <Company>doc.data();
         })),
-        tap(companies => this.localStorageService.setItem('companies', JSON.stringify(companies))),
+        tap(companies => this.SessionStorageService.setItem('companies', JSON.stringify(companies))),
         catchError(err => of([])),
         shareReplay()
       );
     }
     else {
-      return of(JSON.parse(this.localStorageService.getItem('companies'))).pipe(
+      return of(JSON.parse(this.SessionStorageService.getItem('companies'))).pipe(
         shareReplay()
       );
     }
   }
 
   getJobOffers(): Observable<JobOffer[]> {
-    if(!this.localStorageService.getItem('job-offers')) {
+    if(!this.SessionStorageService.getItem('job-offers')) {
       return this.db.collection(`job-offers`).get().pipe(
         map(jobOffers => jobOffers.docs.map(doc => {
           return <JobOffer>doc.data();
         })),
-        tap(jobOffers => this.localStorageService.setItem('job-offers', JSON.stringify(jobOffers))),
+        tap(jobOffers => this.SessionStorageService.setItem('job-offers', JSON.stringify(jobOffers))),
         catchError(err => of([])),
         shareReplay()
       );
     }
     else {
-      return of(JSON.parse(this.localStorageService.getItem('job-offers'))).pipe(
+      return of(JSON.parse(this.SessionStorageService.getItem('job-offers'))).pipe(
         shareReplay()
       );
     }
   }
 
   getCandidates(): Observable<Candidate[]> {
-    if(!this.localStorageService.getItem('candidates')) {
+    if(!this.SessionStorageService.getItem('candidates')) {
       return this.db.collection(`candidates`).get().pipe(
         map(candidates => candidates.docs.map(doc => {
           let candidate: Candidate = <Candidate>doc.data();
@@ -143,31 +143,31 @@ export class DatabaseService {
           console.log(candidate);
           return candidate;
         })),
-        tap(candidates => this.localStorageService.setItem('candidates', JSON.stringify(candidates))),
+        tap(candidates => this.SessionStorageService.setItem('candidates', JSON.stringify(candidates))),
         catchError(err => of([])),
         shareReplay()
       );
     }
     else {
-      return of(JSON.parse(this.localStorageService.getItem('candidates'))).pipe(
+      return of(JSON.parse(this.SessionStorageService.getItem('candidates'))).pipe(
         shareReplay()
       );
     }
   }
 
   getCandidateStatuses(): Observable<CandidateStatus[]> {
-    if(!this.localStorageService.getItem('candidate-statuses')) {
+    if(!this.SessionStorageService.getItem('candidate-statuses')) {
       return this.db.collection(`candidate-statuses`).get().pipe(
         map(candidateStatuses => candidateStatuses.docs.map(doc => {
           return <CandidateStatus>doc.data();
         })),
-        tap(candidateStatuses => this.localStorageService.setItem('candidate-statuses', JSON.stringify(candidateStatuses))),
+        tap(candidateStatuses => this.SessionStorageService.setItem('candidate-statuses', JSON.stringify(candidateStatuses))),
         catchError(err => of([])),
         shareReplay()
       );
     }
     else {
-      return of(JSON.parse(this.localStorageService.getItem('candidate-statuses'))).pipe(
+      return of(JSON.parse(this.SessionStorageService.getItem('candidate-statuses'))).pipe(
         shareReplay()
       );
     }
@@ -175,32 +175,32 @@ export class DatabaseService {
 
   putRegisteredCompany(company: RegisteredCompany): Observable<void> {
     return from(this.db.collection(`registered-companies`).doc(this.db.createId()).set(company).then(() => {
-      this.localStorageService.removeItem('registered-companies');
+      this.SessionStorageService.removeItem('registered-companies');
     }));
   }
 
   putCandidateStatus(candidate: Candidate, status: string): Observable<void> {
     candidate.status = status;
     return from(this.db.collection(`candidates`).doc(candidate.uid).set(candidate).then(() => {
-      this.localStorageService.removeItem('candidates');
+      this.SessionStorageService.removeItem('candidates');
     }));
   }
 
   putCompany(company: Company): Observable<void> {
     return from(this.db.collection(`companies`).doc(this.db.createId()).set(company).then(() => {
-      this.localStorageService.removeItem('companies');
+      this.SessionStorageService.removeItem('companies');
     }));
   }
 
   putCandidate(candidate: Candidate): Observable<void> {
     return from(this.db.collection(`candidates`).doc(this.db.createId()).set(candidate).then(() => {
-      this.localStorageService.removeItem('candidates');
+      this.SessionStorageService.removeItem('candidates');
     }));
   }
 
   putJobOffer(offer: JobOffer): Observable<void> {
     return from(this.db.collection(`job-offers`).doc(this.db.createId()).set(offer).then(() => {
-      this.localStorageService.removeItem('job-offers');
+      this.SessionStorageService.removeItem('job-offers');
     }));
   }
 
