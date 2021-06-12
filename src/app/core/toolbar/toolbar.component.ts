@@ -8,6 +8,7 @@ import {
 import { DatabaseService } from '../database.service';
 import { AuthService } from '../../auth/auth.service';
 import { Admin } from 'src/app/model/admin';
+import { RegisteredCompany } from 'src/app/model/registered-company';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -17,6 +18,7 @@ import { Admin } from 'src/app/model/admin';
 export class ToolbarComponent implements OnInit {
   loggedIn: boolean = false;
   isAdmin: boolean = false;
+  isCompany: boolean = false;
 
   photoLoaded = false;
   displayName!: string;
@@ -30,11 +32,17 @@ export class ToolbarComponent implements OnInit {
   ) {}
 
   logout(): void {
-    this.authService.logout();
+    if (!!sessionStorage.getItem('company')) {
+      this.authService.companyLogout();
+    }
+    else {
+      this.authService.logout();
+    }
   }
 
   ngOnInit(): void {
     const loadUser = sessionStorage.getItem('user');
+    const loadCompany = sessionStorage.getItem('company');
     const loadAdmin = sessionStorage.getItem('admin');
 
     if (!!loadAdmin) {
@@ -43,6 +51,15 @@ export class ToolbarComponent implements OnInit {
       this.email = admin.email;
       this.image = admin.image;
       this.isAdmin = true;
+
+      this.photoLoaded = true;
+      this.loggedIn = true;
+    }
+    if (!!loadCompany) {
+      const company: RegisteredCompany = JSON.parse(loadCompany);
+      this.displayName = company.name;
+      this.email = company.email;
+      this.isCompany = true;
 
       this.photoLoaded = true;
       this.loggedIn = true;

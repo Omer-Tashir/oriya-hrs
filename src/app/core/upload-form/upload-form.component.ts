@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { FileUpload } from 'src/app/model/file-upload';
 import { StorageService } from '../storage.service';

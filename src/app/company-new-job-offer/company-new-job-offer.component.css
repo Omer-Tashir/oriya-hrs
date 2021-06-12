@@ -1,0 +1,25 @@
+.form {
+    padding: 25px;
+}
+
+.form-inputs-wrapper {
+    display: grid;
+    background: white;
+    gap: 50px;
+    padding: 25px;
+}
+
+.inner-grid {
+    display: grid;
+    grid-template-columns: 300px 300px;
+    gap: 25px;
+}
+
+.submit-btn {
+    margin-top: 25px;
+}
+
+.link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

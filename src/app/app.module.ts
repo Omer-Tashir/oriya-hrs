@@ -61,6 +61,10 @@ import { CandidatesComponent } from './candidates/candidates.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { UploadFormComponent } from './core/upload-form/upload-form.component';
 import { UploadDetailsComponent } from './core/upload-details/upload-details.component';
+import { SalarySurveyComponent } from './salary-survey/salary-survey.component';
+import { CompanyJoinUsComponent } from './core/company-join-us/company-join-us.component';
+import { CompanyNewJobOfferComponent } from './company-new-job-offer/company-new-job-offer.component';
+import { CompanySignUpComponent } from './company-sign-up/company-sign-up.component';
 
 export const CUSTOM_DATE_FORMAT = {
   parse: {
@@ -97,7 +101,11 @@ export const CUSTOM_DATE_FORMAT = {
     CandidatesComponent,
     ArticlesComponent,
     UploadFormComponent,
-    UploadDetailsComponent
+    UploadDetailsComponent,
+    SalarySurveyComponent,
+    CompanyJoinUsComponent,
+    CompanyNewJobOfferComponent,
+    CompanySignUpComponent
   ],
   imports: [
     CommonModule,

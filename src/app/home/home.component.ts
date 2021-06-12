@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
   randomImage1: number = Math.floor(Math.random() * 6) + 1;
   randomImage2: number = Math.floor(Math.random() * 6) + 1;
 
+  isCompany = false;
   auth$!: Observable<any>;
   categories$!: Observable<Category[]>;
   companies$!: Observable<Company[]>;
@@ -43,7 +44,9 @@ export class HomeComponent implements OnInit {
   constructor(
     public afAuth: AngularFireAuth, 
     private db: DatabaseService
-  ) { }
+  ) { 
+    this.isCompany = !!sessionStorage.getItem('company');
+  }
 
   ngOnInit(): void {
     this.categories$ = this.db.getCategories();

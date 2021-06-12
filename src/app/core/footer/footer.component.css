@@ -33,3 +33,7 @@ footer * {
     text-align: center;
     font-size: 13px;
 }
+
+.title-no-margin {
+    margin: 0;
+}

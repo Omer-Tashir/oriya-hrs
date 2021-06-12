@@ -6,6 +6,7 @@ import { from, Observable, of } from 'rxjs';
 import { Globals } from '../app.globals';
 
 import { LocalStorageService } from './local-storage-service';
+import { RegisteredCompany } from '../model/registered-company';
 import { Candidate } from '../model/candidate';
 import { Category } from '../model/category';
 import { Company } from '../model/company';
@@ -58,6 +59,24 @@ export class DatabaseService {
     }
   }
 
+  getRegisteredCompanies(): Observable<RegisteredCompany[]> {
+    if(!this.localStorageService.getItem('registered-companies')) {
+      return this.db.collection(`registered-companies`).get().pipe(
+        map(registeredCompanies => registeredCompanies.docs.map(doc => {
+          return <RegisteredCompany>doc.data();
+        })),
+        tap(registeredCompanies => this.localStorageService.setItem('registered-companies', JSON.stringify(registeredCompanies))),
+        catchError(err => of([])),
+        shareReplay()
+      );
+    }
+    else {
+      return of(JSON.parse(this.localStorageService.getItem('registered-companies'))).pipe(
+        shareReplay()
+      );
+    }
+  }
+
   getCompanies(): Observable<Company[]> {
     if(!this.localStorageService.getItem('companies')) {
       return this.db.collection(`companies`).get().pipe(
@@ -92,6 +111,12 @@ export class DatabaseService {
         shareReplay()
       );
     }
+  }
+
+  putRegisteredCompany(company: RegisteredCompany): Observable<void> {
+    return from(this.db.collection(`registered-companies`).doc(this.db.createId()).set(company)).pipe(
+      tap(() => this.localStorageService.removeItem('registered-companies'))
+    );
   }
 
   putCompany(company: Company): Observable<void> {

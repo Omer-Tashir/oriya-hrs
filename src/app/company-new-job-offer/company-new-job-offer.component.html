@@ -1,0 +1,47 @@
+<app-toolbar></app-toolbar>
+
+<div class="main-section">  
+    <section class="background">
+      <div class="background-container">
+        <div class="background-{{randomImage}}"></div>
+        <img src="assets/logo.png" />
+        <p>פרסום משרה</p>
+      </div>
+    </section>
+
+    <section class="form" [@fadeInOnEnter]>
+      <div class="inputs-container">
+        <form [formGroup]="form" autocomplete="new-phone" novalidate
+        fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <div class="form-inputs-wrapper">
+        <div class="inner-grid">
+            <mat-form-field class="input-field">
+                <input autocomplete="new-phone" matInput type="text" placeholder="תפקיד" formControlName="role" id="role" required>
+                <mat-error *ngIf="hasError('role', 'required')">חובה להזין תפקיד</mat-error>
+                </mat-form-field>
+    
+                <mat-form-field class="input-field">
+                <input autocomplete="new-phone" matInput type="text" placeholder="עיר" formControlName="city" id="city" required [matAutocomplete]="autoCities"
+                (blur)="checkCity()" autocomplete="new-phone">
+                <mat-autocomplete autoActiveFirstOption #autoCities="matAutocomplete" (optionSelected)="cityClick($event)">
+                    <mat-option *ngFor="let city of filteredCities | async" [value]="city.name">
+                    {{ city.name }}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="hasError('city', 'required')">חובה להזין עיר</mat-error>
+            </mat-form-field>
+        </div>
+
+          <mat-form-field>
+            <textarea autocomplete="new-phone" matInput type="text" rows="15" placeholder="תיאור המשרה" formControlName="description" id="description" required></textarea>
+            <mat-error *ngIf="hasError('description', 'required')">חובה להזין תיאור</mat-error>
+          </mat-form-field>
+        </div>
+        </form>
+      </div>
+
+      <button (click)="submit(form?.value)" class="submit-btn" mat-raised-button color="primary" [disabled]="!form?.valid">פרסם משרה</button>
+    </section>
+</div>
+  
+<app-footer></app-footer>

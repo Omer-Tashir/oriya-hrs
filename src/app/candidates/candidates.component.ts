@@ -13,7 +13,6 @@ import { DatabaseService } from '../core/database.service';
 import { Candidate } from '../model/candidate';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { FileUpload } from '../model/file-upload';
 import { AlertService } from '../core/alerts/alert.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';

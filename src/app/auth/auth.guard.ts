@@ -19,3 +19,18 @@ export class isAdminGuard implements CanActivate {
     });
   }
 }
+
+@Injectable({
+  providedIn: 'root',
+})
+export class isCompanyGuard implements CanActivate {
+  constructor() {}
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      !!sessionStorage.getItem('company') ? resolve(true) : reject('company');
+    });
+  }
+}

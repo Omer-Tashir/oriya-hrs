@@ -217,10 +217,6 @@ mat-row:nth-child(even) {
   font-weight: 400 !important;
 }
 
-.mat-paginator button {
-  border-bottom: 2px solid rgb(190, 58, 45) !important;
-}
-
 mat-header-cell {
   font-size: 14px !important;
 }
