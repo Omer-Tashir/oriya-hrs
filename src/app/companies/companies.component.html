@@ -29,8 +29,10 @@
                matSortDisableClear matSortDirection="asc">
     
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="name">שם לקוח</th>
-            <td mat-cell *matCellDef="let row">{{row.name}}</td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="name">שם החברה</th>
+            <td mat-cell *matCellDef="let row">
+              <a [routerLink]="['/company-job-offers', row.name]">{{row.name}}</a>
+            </td>
           </ng-container>
     
           <ng-container matColumnDef="contactName">
@@ -49,13 +51,23 @@
           </ng-container>
     
           <ng-container matColumnDef="phone">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="phone">טלפון</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="phone">טלפון חברה</th>
             <td mat-cell *matCellDef="let row">{{row.phone}}</td>
           </ng-container>
     
           <ng-container matColumnDef="domain">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="domain">תחום עיסוק</th>
             <td mat-cell *matCellDef="let row">{{row.domain}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="email">אימייל</th>
+            <td mat-cell *matCellDef="let row">
+              <div class="save-icon-flex">
+                <input matInput value="{{row.email}}" (keyup)="updateEmail(row, $event)">
+                <mat-icon class="save-icon" *ngIf="row.emailChanged===true" (click)="saveCompanyEmail(row)">save</mat-icon>
+              </div>
+            </td>
           </ng-container>
     
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

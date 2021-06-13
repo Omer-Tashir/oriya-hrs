@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { DatabaseService } from '../core/database.service';
 import { AlertService } from '../core/alerts/alert.service';
-import { RegisteredCompany } from '../model/registered-company';
+import { Company } from '../model/company';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +42,7 @@ export class AuthService {
     this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
-        this.db.getRegisteredCompanies().subscribe(companies => {
+        this.db.getCompanies().subscribe(companies => {
           const currentUser = companies.find(c => c.email === email);
           if (!!currentUser) {
             sessionStorage.setItem('company', JSON.stringify(currentUser));
@@ -58,13 +58,13 @@ export class AuthService {
       });
   }
   
-  companyRegister(name: string, phone: string, email: string, password: string, image: string) {
-    let newCompany: RegisteredCompany = Object.assign({name, phone, email, image}, new RegisteredCompany);
+  companyRegister(name: string, contactName: string, contactPhone: string, contactRole: string, phone: string, domain: string, email: string, password: string, image: string) {
+    let newCompany: Company = Object.assign({name, contactName, contactPhone, contactRole, phone, domain, email, image}, new Company);
 
     this.afAuth.
     createUserWithEmailAndPassword(email, password)
     .then((auth) => {
-      this.db.putRegisteredCompany(newCompany).subscribe(() => {
+      this.db.putCompany(newCompany).subscribe(() => {
         sessionStorage.setItem('company', JSON.stringify(newCompany));
         sessionStorage.setItem('user', JSON.stringify(auth.user));
         this.router.navigate(['company-new-job-offer']);

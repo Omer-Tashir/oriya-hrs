@@ -11,6 +11,7 @@ import { CandidatesComponent } from './candidates/candidates.component';
 import { SalarySurveyComponent } from './salary-survey/salary-survey.component';
 import { CompanySignUpComponent } from './company-sign-up/company-sign-up.component';
 import { CompanyNewJobOfferComponent } from './company-new-job-offer/company-new-job-offer.component';
+import { CompanyJobOffersComponent } from './company-job-offers/company-job-offers.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
@@ -20,9 +21,14 @@ const routes: Routes = [
   { path: 'candidates', component: CandidatesComponent },
   { path: 'salary-survey', component: SalarySurveyComponent },
   { path: 'articles', component: ArticlesComponent },
+  { path: 'contact-us', component: ContactUsComponent },
   { path: 'company-sign-up', component: CompanySignUpComponent },
   { path: 'company-new-job-offer', component: CompanyNewJobOfferComponent, canActivate: [isCompanyGuard] },
-  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'company-job-offers', children: [{
+      path: ':companyName',
+      component: CompanyJobOffersComponent
+    }] 
+  },
 ];
 
 @NgModule({

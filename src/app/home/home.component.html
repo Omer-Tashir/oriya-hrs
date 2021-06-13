@@ -30,6 +30,9 @@
     </div>
   </section>
 
+  <!-- <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file">
+  <button type="button" class="btn btn-info" (click)="uploadCompaniesExcel()" >Upload</button> -->
+
   <ng-container *ngIf="(jobOffers$ | async) as jobOffers">
   <section *ngIf="jobOffers.length>0" class="job-offers-section" [@fadeInOnEnter] [@fadeOutOnLeave]>
       <p class="job-offers-title">משרות חדשות באתר:</p>
@@ -40,7 +43,9 @@
               (load)="offer.photoLoaded = true">
               <p class="role">{{offer.role}}</p>
               <div class="offer-grid">
-                <p class="company">מעסיק: <img *ngIf="!!getCompanyImage(offer.companyName)" class="company-image" [src]="getCompanyImage(offer.companyName)">{{offer.companyName}}</p>
+                <p class="company">מעסיק: <img *ngIf="!!getCompanyImage(offer.companyName)" class="company-image" [src]="getCompanyImage(offer.companyName)">
+                  <a [routerLink]="['/company-job-offers', offer.companyName]">{{offer.companyName}}</a>
+                </p>
                 <p class="city">עיר: {{offer.city}}</p>
               </div>
 

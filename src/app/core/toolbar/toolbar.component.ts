@@ -7,8 +7,9 @@ import {
 
 import { DatabaseService } from '../database.service';
 import { AuthService } from '../../auth/auth.service';
+
 import { Admin } from 'src/app/model/admin';
-import { RegisteredCompany } from 'src/app/model/registered-company';
+import { Company } from 'src/app/model/company';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -54,7 +55,7 @@ export class ToolbarComponent implements OnInit {
       this.isAdmin = true;
     }
     else if (!!loadCompany) {
-      const company: RegisteredCompany = JSON.parse(loadCompany);
+      const company: Company = JSON.parse(loadCompany);
       this.displayName = company.name;
       this.email = company.email;
       this.image = company.image;

@@ -98,7 +98,7 @@ button:last-child{
   height: 25px;
   object-fit: contain;
   border-radius: 50%;
-  vertical-align: sub;
+  vertical-align: bottom;
   margin: 0 2px 0 5px;
 }
 

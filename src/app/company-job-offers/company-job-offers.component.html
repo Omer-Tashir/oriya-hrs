@@ -1,0 +1,37 @@
+<app-toolbar></app-toolbar>
+
+<div class="main-section"> 
+  <ng-container *ngIf="(companyOffers$ | async) as companyOffers">
+    <section class="background">
+      <div class="background-container">
+        <div class="background-{{randomImage}}"></div>
+        <img src="assets/logo.png" />
+        <p>משרות פתוחות בחברת {{company?.name}}</p>
+      </div>
+    </section>
+
+    <section class="company-section">
+          <div class="job-offers" @listAnimation>
+            <div class="job-offer" *ngFor="let offer of companyOffers" @item>
+              <div class="job-offer-item">
+                <img [ngClass]="{'hidden': !offer.photoLoaded}" [attr.src]="offer.image" width="300" height="200"
+                  (load)="offer.photoLoaded = true">
+                  <p class="role">{{offer.role}}</p>
+                  <div class="offer-grid">
+                    <p class="city">עיר: {{offer.city}}</p>
+                  </div>
+    
+                  <mat-chip class="employment-type">{{getEmploymentType(offer.employmentType)?.name}}</mat-chip>
+    
+                  <div class="submit-buutons">
+                    <button class="submit" (click)="showMore(offer)">פרטים נוספים</button>
+                    <button class="submit" [routerLink]="['/candidates']">הגש מועמדות</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+    </section>
+  </ng-container>
+</div>
+
+<app-footer></app-footer>

@@ -23,7 +23,11 @@ export class CompanySignUpComponent implements OnInit {
   ) {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.nullValidator],
+      contactName: ['', Validators.nullValidator],
+      contactPhone: ['', Validators.nullValidator],
+      contactRole: ['', Validators.nullValidator],
       phone: ['', Validators.nullValidator],
+      domain: ['', Validators.nullValidator],
       email: ['', Validators.required],
       password: ['', Validators.required],
       image: ['', Validators.nullValidator],
@@ -49,7 +53,11 @@ export class CompanySignUpComponent implements OnInit {
     if (this.newCompany) {
       this.authService.companyRegister(
         this.formGroup.get('name')?.value,
+        this.formGroup.get('contactName')?.value,
+        this.formGroup.get('contactPhone')?.value,
+        this.formGroup.get('contactRole')?.value,
         this.formGroup.get('phone')?.value,
+        this.formGroup.get('domain')?.value,
         this.formGroup.get('email')?.value,
         this.formGroup.get('password')?.value,
         this.formGroup.get('image')?.value

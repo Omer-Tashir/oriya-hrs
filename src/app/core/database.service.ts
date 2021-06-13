@@ -6,7 +6,6 @@ import { from, Observable, of } from 'rxjs';
 import { Globals } from '../app.globals';
 
 import { SessionStorageService } from './session-storage-service';
-import { RegisteredCompany } from '../model/registered-company';
 import { Candidate } from '../model/candidate';
 import { Category } from '../model/category';
 import { Company } from '../model/company';
@@ -80,29 +79,13 @@ export class DatabaseService {
     }
   }
 
-  getRegisteredCompanies(): Observable<RegisteredCompany[]> {
-    if(!this.SessionStorageService.getItem('registered-companies')) {
-      return this.db.collection(`registered-companies`).get().pipe(
-        map(registeredCompanies => registeredCompanies.docs.map(doc => {
-          return <RegisteredCompany>doc.data();
-        })),
-        tap(registeredCompanies => this.SessionStorageService.setItem('registered-companies', JSON.stringify(registeredCompanies))),
-        catchError(err => of([])),
-        shareReplay()
-      );
-    }
-    else {
-      return of(JSON.parse(this.SessionStorageService.getItem('registered-companies'))).pipe(
-        shareReplay()
-      );
-    }
-  }
-
   getCompanies(): Observable<Company[]> {
     if(!this.SessionStorageService.getItem('companies')) {
       return this.db.collection(`companies`).get().pipe(
         map(companies => companies.docs.map(doc => {
-          return <Company>doc.data();
+          let company: Company = <Company>doc.data();
+          company.uid = doc.id;
+          return company;
         })),
         tap(companies => this.SessionStorageService.setItem('companies', JSON.stringify(companies))),
         catchError(err => of([])),
@@ -140,7 +123,6 @@ export class DatabaseService {
         map(candidates => candidates.docs.map(doc => {
           let candidate: Candidate = <Candidate>doc.data();
           candidate.uid = doc.id;
-          console.log(candidate);
           return candidate;
         })),
         tap(candidates => this.SessionStorageService.setItem('candidates', JSON.stringify(candidates))),
@@ -173,16 +155,17 @@ export class DatabaseService {
     }
   }
 
-  putRegisteredCompany(company: RegisteredCompany): Observable<void> {
-    return from(this.db.collection(`registered-companies`).doc(this.db.createId()).set(company).then(() => {
-      this.SessionStorageService.removeItem('registered-companies');
-    }));
-  }
-
   putCandidateStatus(candidate: Candidate, status: string): Observable<void> {
     candidate.status = status;
     return from(this.db.collection(`candidates`).doc(candidate.uid).set(candidate).then(() => {
       this.SessionStorageService.removeItem('candidates');
+    }));
+  }
+
+  putCompanyEmail(company: Company, email: string): Observable<void> {
+    company.email = email;
+    return from(this.db.collection(`companies`).doc(company.uid).set(company).then(() => {
+      this.SessionStorageService.removeItem('companies');
     }));
   }
 

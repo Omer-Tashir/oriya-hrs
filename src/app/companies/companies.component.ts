@@ -27,7 +27,7 @@ import { Company } from '../model/company';
 })
 export class CompaniesComponent implements OnInit, AfterViewInit {
   randomImage: number = Math.floor(Math.random() * 10) + 1;
-  displayedColumns: string[] = ['name', 'contactName', 'contactRole', 'contactPhone', 'phone', 'domain'];
+  displayedColumns: string[] = ['name', 'contactName', 'contactRole', 'contactPhone', 'phone', 'domain', 'email'];
 
   auth$!: Observable<any>;
   companies$!: Observable<Company[]>;
@@ -44,6 +44,17 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
     public afAuth: AngularFireAuth, 
     private db: DatabaseService
   ) { }
+
+  updateEmail(company: Company, $event: any) {
+    company.email = $event?.target?.value;
+    company.emailChanged = true;
+  }
+
+  saveCompanyEmail(company: Company) {
+    this.db.putCompanyEmail(company, company.email).subscribe(() => {
+      company.emailChanged = false;
+    });
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -66,6 +77,7 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
         case 'contactRole': return this.compare(a.contactRole, b.contactRole, isAsc);
         case 'domain': return this.compare(a.domain, b.domain, isAsc);
         case 'phone': return this.compare(a.phone, b.phone, isAsc);
+        case 'email': return this.compare(a.email, b.email, isAsc);
         default: return 0;
       }
     });
@@ -107,7 +119,7 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
           return data;
         })
       ).subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
+        this.dataSource = new MatTableDataSource(data.map(d=>{d.emailChanged = false; return d;}));
         this.dataSource.filterPredicate = (company: Company, filter: string) => {
           return JSON.stringify(company).indexOf(filter) != -1
         };

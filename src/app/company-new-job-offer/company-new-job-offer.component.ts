@@ -10,13 +10,12 @@ import {
 } from 'angular-animations';
 
 import { DatabaseService } from '../core/database.service';
-import { Candidate } from '../model/candidate';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { AlertService } from '../core/alerts/alert.service';
 import { EmploymentType } from '../model/employment-type';
 import { JobOffer } from '../model/job-offer';
-import { RegisteredCompany } from '../model/registered-company';
+import { Company } from '../model/company';
 
 @Component({
   selector: 'app-company-new-job-offer',
@@ -30,7 +29,7 @@ export class CompanyNewJobOfferComponent implements OnInit {
   randomImage: number = Math.floor(Math.random() * 10) + 1;
   form: FormGroup = new FormGroup({});
   auth$!: Observable<any>;
-  company!: RegisteredCompany;
+  company!: Company;
 
   imageUrl!: string;
   selectedCity: any;

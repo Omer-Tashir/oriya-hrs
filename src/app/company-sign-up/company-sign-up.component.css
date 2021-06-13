@@ -54,7 +54,6 @@ mat-form-field:-webkit-autofill:focus,
 .login-form {
   display: block;
   width: 100%;
-  max-width: 300px;
   margin: auto;
 }
 
@@ -102,4 +101,10 @@ mat-form-field input {
 .form-field span {
   display: block;
   padding-bottom: 10px;
+}
+
+.login-form-grid {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 25px;
 }

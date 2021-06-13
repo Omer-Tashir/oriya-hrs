@@ -16,8 +16,8 @@ import { Category } from '../model/category';
 import { Company } from '../model/company';
 import { EmploymentType } from '../model/employment-type';
 import { JobOffer } from '../model/job-offer';
-import { RegisteredCompany } from '../model/registered-company';
 
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -41,14 +41,17 @@ export class HomeComponent implements OnInit {
   randomImage1: number = Math.floor(Math.random() * 10) + 1;
   randomImage2: number = Math.floor(Math.random() * 10) + 1;
 
+  arrayBuffer!: any;
+  file!: File;
+
   isCompany = false;
   isAdmin = false;
   auth$!: Observable<any>;
   categories$!: Observable<Category[]>;
-  companies$!: Observable<RegisteredCompany[]>;
+  companies$!: Observable<Company[]>;
   jobOffers$!: Observable<JobOffer[]>;
 
-  companies: RegisteredCompany[] = [];
+  companies: Company[] = [];
   employmentTypes: EmploymentType[] = [];
 
   constructor(
@@ -60,7 +63,7 @@ export class HomeComponent implements OnInit {
     this.isAdmin = !!sessionStorage.getItem('admin');
     this.db.getEmploymentTypes().subscribe(types => {
       this.employmentTypes = types;
-    })
+    });
   }
 
   getCompanyImage(companyName: string) {
@@ -78,7 +81,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories$ = this.db.getCategories();
-    this.companies$ = this.db.getRegisteredCompanies();
+    this.companies$ = this.db.getCompanies();
 
     this.companies$.pipe(
       tap(companies => this.companies = companies)
@@ -99,6 +102,39 @@ export class HomeComponent implements OnInit {
         employmentType: this.getEmploymentType(offer.employmentType)
       }
     });
+  }
+
+  incomingfile(event: any) {
+    this.file= event.target.files[0]; 
+  }
+
+  uploadCompaniesExcel() {
+    let fileReader = new FileReader();
+      fileReader.onload = (e) => {
+          this.arrayBuffer = fileReader.result;
+          var data = new Uint8Array(this.arrayBuffer);
+          var arr = new Array();
+          for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+          var bstr = arr.join("");
+          var workbook = XLSX.read(bstr, {type:"binary"});
+          var first_sheet_name = workbook.SheetNames[0];
+          var worksheet = workbook.Sheets[first_sheet_name];
+          console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
+          XLSX.utils.sheet_to_json(worksheet,{raw:true}).forEach((o:any) => {
+            const company: Company = {
+              name: o['__EMPTY'] ?? '',
+              contactName: o['משאבי אנוש תוספת- כל הזכויות שמורות לועדים הוצאה לאור בע"מ'] ?? '',
+              contactRole: o['__EMPTY_1'] ?? '',
+              contactPhone: o['__EMPTY_3'] ?? '',
+              phone: o['__EMPTY_2'] ?? '',
+              domain: '',
+            } as Company;
+
+            this.db.putCompany(company);
+            console.log(company);
+          });
+      }
+      fileReader.readAsArrayBuffer(this.file);
   }
 }
 

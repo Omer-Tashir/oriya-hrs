@@ -6,3 +6,12 @@
 .search {
     background: white;
 }
+
+.save-icon-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.save-icon {
+    cursor: pointer;
+}
