@@ -45,6 +45,17 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
     private db: DatabaseService
   ) { }
 
+  updateDomain(company: Company, $event: any) {
+    company.domain = $event?.target?.value;
+    company.domainChanged = true;
+  }
+
+  saveCompanyDomain(company: Company) {
+    this.db.putCompanyDomain(company, company.domain).subscribe(() => {
+      company.domainChanged = false;
+    });
+  }
+
   updateEmail(company: Company, $event: any) {
     company.email = $event?.target?.value;
     company.emailChanged = true;
@@ -119,10 +130,16 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
           return data;
         })
       ).subscribe(data => {
-        this.dataSource = new MatTableDataSource(data.map(d=>{d.emailChanged = false; return d;}));
+        this.dataSource = new MatTableDataSource(data.map(d=>{
+          d.emailChanged = false; 
+          d.domainChanged = false; 
+          return d;
+        }));
+
         this.dataSource.filterPredicate = (company: Company, filter: string) => {
           return JSON.stringify(company).indexOf(filter) != -1
         };
+
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.sortData({ active: 'name', direction: 'asc' });

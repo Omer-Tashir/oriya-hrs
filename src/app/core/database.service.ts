@@ -162,6 +162,13 @@ export class DatabaseService {
     }));
   }
 
+  putCompanyDomain(company: Company, domain: string): Observable<void> {
+    company.domain = domain;
+    return from(this.db.collection(`companies`).doc(company.uid).set(company).then(() => {
+      this.SessionStorageService.removeItem('companies');
+    }));
+  }
+
   putCompanyEmail(company: Company, email: string): Observable<void> {
     company.email = email;
     return from(this.db.collection(`companies`).doc(company.uid).set(company).then(() => {

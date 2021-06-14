@@ -9,5 +9,7 @@ export class Company {
     email!: string;
     image!: string;
     password!: string;
+    
+    domainChanged = false;
     emailChanged = false;
 }
